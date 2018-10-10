@@ -1,3 +1,4 @@
+//Jackie Fang 10/10/18
 import java.util.Random;
 import java.util.Scanner;
 

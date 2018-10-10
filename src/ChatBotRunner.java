@@ -16,7 +16,7 @@ public class ChatBotRunner
 		PhoneBot chatbot1 = new PhoneBot();
 		GameBot chatbot2 = new GameBot();
 		HomeAppBot chatbot3 = new HomeAppBot();
-		
+		ChatBot4 chatbot4 = new ChatBot4();
 
 		Scanner in = new Scanner (System.in);
 		System.out.println("Welcome to the chatbot, nice to meet you.");
@@ -27,8 +27,8 @@ public class ChatBotRunner
 		{
 			//Use Logic to control which chatbot is handling the conversation\
 			//This example has only chatbot1
-
-
+			System.out.println("What kind of store are you looking to check? We have phones, games, home appliances, and catbot4.");
+			if (in.nextLine() == "phone")
 
 			chatbot1.chatLoop(statement);
 
@@ -37,6 +37,7 @@ public class ChatBotRunner
 
 
 		}
+		System.out.println("Have a nice day!");
 	}
 
 }
