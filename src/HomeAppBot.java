@@ -7,10 +7,12 @@ import java.util.Scanner;
  * @author Brooklyn Tech CS Department
  * @version September 2018
  */
-public class ChatBot1
+public class HomeAppBot
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
+
+
 
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
@@ -67,17 +69,7 @@ public class ChatBot1
 		
 		else if (findKeyword(statement, "levin") >= 0)
 		{
-			response = "More like LevinTheDream, amiright?";
-			emotion++;
-		}
-		else if (findKeyword(statement, "folwell") >= 0)
-		{
-			response = "Watch your backpacks, Mr. Folwell doesn't fall well.";
-			emotion++;
-		}
-		else if (findKeyword(statement, "goldman") >= 0)
-		{
-			response = "Go for the gold, man.";
+			response = "More like LevinTheDream amiright?";
 			emotion++;
 		}
 
