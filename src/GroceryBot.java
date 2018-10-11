@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Brooklyn Tech CS Department
  * @version September 2018
  */
-public class ChatBot4
+public class GroceryBot
 {
     //emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
     int emotion = 0;
@@ -16,7 +16,7 @@ public class ChatBot4
      * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
      * @param statement the statement typed by the user
      */
-    public void chatLoop(String statement)
+    public void groceryLoop(String statement)
     {
         Scanner in = new Scanner (System.in);
         System.out.println (getGreeting());
@@ -40,7 +40,7 @@ public class ChatBot4
      */
     public String getGreeting()
     {
-        return "Hi, what is up?";
+        return "Hi, what grocery category are you looking for?";
     }
 
     /**
@@ -59,7 +59,7 @@ public class ChatBot4
             response = "Say something, please.";
         }
 
-        else if (findKeyword(statement, "no") >= 0)
+        /* else if (findKeyword(statement, "no") >= 0)
         {
             response = "Why so negative?";
             emotion--;
@@ -79,10 +79,10 @@ public class ChatBot4
         {
             response = "Go for the gold, man.";
             emotion++;
-        }
+        }*/
 
         // Response transforming I want to statement
-        else if (findKeyword(statement, "I want to", 0) >= 0)
+        /* else if (findKeyword(statement, "I want to", 0) >= 0)
         {
             response = transformIWantToStatement(statement);
         }
@@ -90,6 +90,10 @@ public class ChatBot4
         {
             response = transformIWantStatement(statement);
         }
+        else if (findKeyword(statement, "I am looking for",0) >= 0)
+        {
+            response = transformIAmLookingForStatement(statement);
+        }*/
         else
         {
             response = getRandomResponse();
@@ -168,7 +172,22 @@ public class ChatBot4
         String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
         return "Why do you " + restOfStatement + " me?";
     }
+    private String transformIAmLookingForStatement(String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
 
+        int psn = findKeyword (statement, "I am looking for", 0);
+        String restOfStatement = statement.substring(psn + 16).trim();
+        return "What kind of " + restOfStatement + "?";
+    }
 
 
 

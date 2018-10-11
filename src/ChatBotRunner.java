@@ -14,11 +14,11 @@ public class ChatBotRunner {
         PhoneBot chatbot1 = new PhoneBot();
         GameBot chatbot2 = new GameBot();
         HomeAppBot chatbot3 = new HomeAppBot();
-        ChatBot4 chatbot4 = new ChatBot4();
+        GroceryBot chatbot4 = new GroceryBot();
 
         Scanner in = new Scanner(System.in);
         System.out.println("Welcome to the chatbot, nice to meet you.");
-        System.out.println("What kind of store are you looking to check? We have phones, games, home appliances, and catbot4.");
+        System.out.println("What kind of store are you looking to check? We have phones, games, home appliances, and groceries.");
         String statement = in.nextLine();
 
 
@@ -37,7 +37,7 @@ public class ChatBotRunner {
                 chatbot3.homeLoop(statement);
                 statement = in.nextLine();
             }
-            if (statement.equals("home appliances")) {
+            if (statement.equals("groceries")) {
                 chatbot4.groceryLoop(statement);
                 statement = in.nextLine();
             }
