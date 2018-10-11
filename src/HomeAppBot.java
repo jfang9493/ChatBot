@@ -1,3 +1,4 @@
+//Sullivan O'Connor
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class HomeAppBot
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
 	 * @param statement the statement typed by the user
 	 */
-	public void chatLoop(String statement)
+	public void homeLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
@@ -42,7 +43,7 @@ public class HomeAppBot
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hello, welcome to the Home Appliance store! My name is RealPerson856, how can I help you today?";
 	}
 	
 	/**
@@ -78,9 +79,9 @@ public class HomeAppBot
 		{
 			response = transformIWantToStatement(statement);
 		}
-		else if (findKeyword(statement, "I want",0) >= 0)
+		else if (findKeyword(statement, "I want a",0) >= 0)
 		{
-			response = transformIWantStatement(statement);
+			response = transformIWantAStatement(statement);
 		}	
 		else
 		{
@@ -159,6 +160,28 @@ public class HomeAppBot
 		
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
 		return "Why do you " + restOfStatement + " me?";
+	}
+
+	/**
+	 * Take a statement with "I want a <something>." and transform it into
+	 * "Why do you need a <something>?"
+	 * @param statement the user statement, assumed to contain "I want to"
+	 * @return the transformed statement
+	 */
+	private String transformIWantAStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals(".") || lastChar.equals("!"))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "I want a", 0);
+		String restOfStatement = statement.substring(psn + 8).trim();
+		return "What do you need a " + restOfStatement + " for?";
 	}
 	
 
