@@ -41,8 +41,7 @@ public class ChatBotRunner {
                 chatbot4.groceryLoop(statement);
                 statement = in.nextLine();
             }
-            System.out.println("Have a nice day!");
         }
-
+        System.out.println("Have a nice day!");
     }
 }
