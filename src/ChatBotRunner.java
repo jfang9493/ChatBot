@@ -25,13 +25,13 @@ public class ChatBotRunner {
         while (!statement.equals("Bye")) {
             //Use Logic to control which chatbot is handling the conversation\
             //This example has only chatbot1
-            if(!statement.equals("phones")||!statement.equals("games")||!statement.equals("home appliances")||!statement.equals("groceries")){
-                System.out.println("Sorry, we don't have this here, please choose from phones, games, home appliances, or groceries");
-                statement = in.nextLine();
-            }
             if (statement.equals("phones")) {
                 chatbot1.chatLoop(statement);
                 statement = in.nextLine();
+                if (statement.equals("change store")) {
+                    System.out.println("what kind of store would you like to change to ?");
+                    statement = in.nextLine();
+                }
             }
             if (statement.equals("games")) {
                 chatbot2.gameLoop(statement);
@@ -43,6 +43,10 @@ public class ChatBotRunner {
             }
             if (statement.equals("groceries")) {
                 chatbot4.groceryLoop(statement);
+                statement = in.nextLine();
+            }
+            if(!statement.equals("phones")||!statement.equals("games")||!statement.equals("home appliances")||!statement.equals("groceries")){
+                System.out.println("Sorry, we don't have this here, please choose from phones, games, home appliances, or groceries");
                 statement = in.nextLine();
             }
         }
