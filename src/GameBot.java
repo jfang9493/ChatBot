@@ -17,7 +17,7 @@ public class GameBot
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
 	 * @param statement the statement typed by the user
 	 */
-	public void chatLoop(String statement)
+	public void gameLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
@@ -41,7 +41,7 @@ public class GameBot
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hi, what can you help you with today at GameStart today?";
 	}
 	
 	/**
@@ -57,21 +57,26 @@ public class GameBot
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "So you don't like to play games?";
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Why so negative?";
+			response = "Why don't you enjoy game?";
                 	emotion--;
 		}
 		
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (findKeyword(statement, "buy") >= 0)
 		{
-			response = "More like LevinTheDream amiright?";
+			response = "So what kind of game would u like to buy?";
 			emotion++;
 		}
 
+		else if (findKeyword(statement, "yes") >= 0)
+		{
+			response = "So what kind of game would u like to buy?";
+			emotion++;
+		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -106,9 +111,9 @@ public class GameBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
-		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		int psn = findKeyword (statement, "I want to buy", 0);
+		String restOfStatement = statement.substring(psn + 13).trim();
+		return "Why do you like to buy " + restOfStatement + "?";
 	}
 
 	
@@ -129,8 +134,8 @@ public class GameBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want", 0);
-		String restOfStatement = statement.substring(psn + 6).trim();
+		int psn = findKeyword (statement, "I want to play", 0);
+		String restOfStatement = statement.substring(psn + 13).trim();
 		return "Would you really be happy if you had " + restOfStatement + "?";
 	}
 	
