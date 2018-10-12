@@ -80,7 +80,7 @@ public class PhoneBot
 		}
         else if (findKeyword(statement, "check phones", 0) >= 0)
         {
-            return transformCheckPhonesStatement(statement);
+            return customerCheckPhonesStatement(statement);
         }
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -190,7 +190,7 @@ public class PhoneBot
 		return "Is this" + restOfStatement + " what you are looking for?";
 	}
 
-    private String transformCheckPhonesStatement(String statement)
+    private String customerCheckPhonesStatement(String statement)
     {
         //  Remove the final period, if there is one
         statement = statement.trim();
@@ -209,7 +209,26 @@ public class PhoneBot
         if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
         if (emotion > 0) return "we have Android and Apple phones, take your pick.";
     }
-	
+
+    private String transformStatement(String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
+
+        int psnOfCheck = findKeyword (statement, "check", 0);
+        int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
+
+        String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
+        if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
+        if (emotion > 0) return "we have Android and Apple phones, take your pick.";
+    }
 	
 	/**
 	 * Search for one word in phrase. The search is not case
