@@ -21,19 +21,16 @@ public class GroceryBot
     {
         Scanner in = new Scanner (System.in);
         System.out.println (getGreeting());
+        statement = in.nextLine();
 
-
-        while (!statement.equals("Bye"))
+        while (!statement.equals("Bye") || !statement.equals("change store"))
         {
-
-
-            statement = in.nextLine();
             //getResponse handles the user reply
             System.out.println(getResponse(statement));
-
-
+            statement = in.nextLine();
         }
-
+        System.out.println("Oh understandable have a nice day.");
+        System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
     }
     /**
      * Get a default greeting
@@ -173,6 +170,13 @@ public class GroceryBot
         String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
         return "Why do you " + restOfStatement + " me?";
     }
+
+    /**
+     * Take a statement with "I am looking for <something>" and transform it into
+     * "What kind of (something)?"
+     * @param statement the user statement, assumed to contain "I am looking for"
+     * @return the transformed statement
+     */
     private String transformIAmLookingForStatement(String statement)
     {
         //  Remove the final period, if there is one

@@ -28,10 +28,6 @@ public class ChatBotRunner {
             if (statement.equals("phones") || statement.equals("phone")) {
                 chatbot1.chatLoop(statement);
                 statement = in.nextLine();
-                if (statement.equals("change store")) {
-                    System.out.println("what kind of store would you like to change to ?");
-                    statement = in.nextLine();
-                }
             }
             if (statement.equals("games")) {
                 chatbot2.gameLoop(statement);
