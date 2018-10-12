@@ -24,13 +24,14 @@ public class GroceryBot
         System.out.println (getGreeting());
         statement = in.nextLine();
 
-        while (!statement.equals("Bye") && !statement.equals("change store") && emotion != -9)
+        while (!statement.equals("Bye") && !statement.equals("change store") && emotion != -10)
         {
             //getResponse handles the user reply
             System.out.println(getResponse(statement));
-            statement = in.nextLine();
+            if(emotion != -10)
+                statement = in.nextLine();
         }
-        if(emotion == -9){
+        if(emotion == -10){
             System.out.println("You were kicked out of the grocery store.");
         } else {
             System.out.println("Oh understandable have a nice day.");
@@ -316,7 +317,7 @@ public class GroceryBot
     private String [] confusedList = {"I don't think I understand..",
             "Can you rephrase that?",
             "Sorry, I don't get what you mean.",
-            "Repite por favor"
+            "¡Repite por favor!"
     };
     private String [] annoyedList = {"Make up your mind already!",
             "Be serious here! This isn't just a game!",
