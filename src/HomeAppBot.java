@@ -59,18 +59,30 @@ public class HomeAppBot
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "I can't help you if you don't tell me what you need.";
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Why so negative?";
-                	emotion--;
+			emotion--;
 		}
 		
 		else if (findKeyword(statement, "levin") >= 0)
 		{
 			response = "More like LevinTheDream amiright?";
+			emotion++;
+		}
+
+		else if ((findKeyword(statement, "what") >= 0 && (findKeyword(statement, "sell")) >= 0))
+		{
+			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, microwaves, and more! What would you like to know about?";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "refrigerator") >= 0 || (findKeyword(statement, "refrigerators") >=0))
+		{
+			response = "My refrigerator recommendation is the SuperFridge9000, it costs $1500 dollars but it is very spacious and has an AI friend to talk to you if you ever get lonely! If that's out of your price range, the NormalFridge2000 costs $800 and is just a normal refrigerator";
 			emotion++;
 		}
 
