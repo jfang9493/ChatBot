@@ -21,11 +21,9 @@ public class PhoneBot
 	{
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
-        statement = in.nextLine();
 
 		while (!statement.equals("Bye"))
 		{
-            System.out.println(getResponse(statement));
 
 			statement = in.nextLine();
 			//getResponse handles the user reply
@@ -80,21 +78,25 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
+        else if (findKeyword(statement, "check phones", 0) >= 0)
+        {
+            return transformCheckPhonesStatement(statement);
+        }
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
-			response = transformIWantToStatement(statement);
+            return transformIWantToStatement(statement);
 		}
 		else if (findKeyword(statement, "I want a",0) >= 0)
 		{
-			response = transformIWantStatement(statement);
+            return transformIWantStatement(statement);
 		}
 		else if (findKeyword(statement,"I would like",0)>=0)
 		{
-			response = transformIWouldStatement(statement);
+            return transformIWouldStatement(statement);
 		}
 		else {
-			response = getRandomResponse();
+            return getRandomResponse();
 		}
 		return response;
 	}
@@ -123,7 +125,7 @@ public class PhoneBot
 
 	
 	/**
-	 * Take a statement with "I want <something>." and transform it into 
+	 * Take a statement with "I want <something>." and transform it into
 	 * "Would you really be happy if you had <something>?"
 	 * @param statement the user statement, assumed to contain "I want"
 	 * @return the transformed statement
@@ -187,8 +189,26 @@ public class PhoneBot
 		String restOfStatement = statement.substring(psnOfIWould+ 1).trim();
 		return "Is this" + restOfStatement + " what you are looking for?";
 	}
-	
 
+    private String transformCheckPhonesStatement(String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
+
+        int psnOfCheck = findKeyword (statement, "check", 0);
+        int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
+
+        String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
+        if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
+        if (emotion > 0) return "we have Android and Apple phones, take your pick.";
+    }
 	
 	
 	/**
