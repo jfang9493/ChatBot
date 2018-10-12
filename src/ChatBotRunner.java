@@ -25,7 +25,7 @@ public class ChatBotRunner {
         while (!statement.equals("Bye")) {
             //Use Logic to control which chatbot is handling the conversation\
             //This example has only chatbot1
-            if (statement.equals("phones")) {
+            if (statement.equals("phones") || statement.equals("phone")) {
                 chatbot1.chatLoop(statement);
                 statement = in.nextLine();
                 if (statement.equals("change store")) {

@@ -90,9 +90,12 @@ public class PhoneBot
 		else if (findKeyword(statement, "I want",0) >= 0)
 		{
 			response = transformIWantStatement(statement);
-		}	
-		else
+		}
+		else if (findKeyword(statement,"I would like",0)>=0)
 		{
+			response = transformIWouldStatement(statement);
+		}
+		else {
 			response = getRandomResponse();
 		}
 		
@@ -168,6 +171,24 @@ public class PhoneBot
 		
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
 		return "Why do you " + restOfStatement + " me?";
+	}
+
+	private String transformIWouldStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+
+		int psnOfIWould = findKeyword (statement, "I would like ", 0);
+
+		String psnOfIWould = statement.substring(psnOfIWould+ 1).trim();
+		return "Is this" + restOfStatement + " what you are looking for?";
 	}
 	
 
