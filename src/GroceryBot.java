@@ -20,16 +20,21 @@ public class GroceryBot
     public void groceryLoop(String statement)
     {
         Scanner in = new Scanner (System.in);
+        emotion = 0;
         System.out.println (getGreeting());
         statement = in.nextLine();
 
-        while (!statement.equals("Bye") || !statement.equals("change store"))
+        while (!statement.equals("Bye") && !statement.equals("change store") && emotion != -9)
         {
             //getResponse handles the user reply
             System.out.println(getResponse(statement));
             statement = in.nextLine();
         }
-        System.out.println("Oh understandable have a nice day.");
+        if(emotion == -9){
+            System.out.println("You were kicked out of the grocery store.");
+        } else {
+            System.out.println("Oh understandable have a nice day.");
+        }
         System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
     }
     /**
@@ -38,7 +43,7 @@ public class GroceryBot
      */
     public String getGreeting()
     {
-        return "Hi, what grocery category are you looking for?";
+        return "Hello there, and welcome to Smith and Sons International Grocers! What category of groceries are you looking for?";
     }
 
     /**
@@ -87,11 +92,11 @@ public class GroceryBot
         else if (findKeyword(statement, "I want",0) >= 0)
         {
             response = transformIWantStatement(statement);
-        }
+        }*/
         else if (findKeyword(statement, "I am looking for",0) >= 0)
         {
             response = transformIAmLookingForStatement(statement);
-        }*/
+        }
         else
         {
             response = getRandomResponse();
@@ -282,18 +287,22 @@ public class GroceryBot
     private String getRandomResponse ()
     {
         Random r = new Random ();
-        if (emotion == 0)
+        if (emotion >= -5 && emotion <= 0)
         {
-            return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
+            emotion--;
+            return confusedList [r.nextInt(confusedList.length)];
         }
-        if (emotion < 0)
+        else if (emotion > -9 && emotion < -5)
         {
-            return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
+            emotion--;
+            return annoyedList [r.nextInt(annoyedList.length)];
+        } else {
+            emotion--;
+            return limitList[r.nextInt(limitList.length)];
         }
-        return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
     }
 
-    private String [] randomNeutralResponses = {"Interesting, tell me more",
+    /* private String [] randomNeutralResponses = {"Interesting, tell me more",
             "Hmmm.",
             "Do you really think so?",
             "You don't say.",
@@ -302,6 +311,21 @@ public class GroceryBot
             "Could you say that again?"
     };
     private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-    private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+    private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};*/
+
+    private String [] confusedList = {"I don't think I understand..",
+            "Can you rephrase that?",
+            "Sorry, I don't get what you mean.",
+            "Repite por favor"
+    };
+    private String [] annoyedList = {"Make up your mind already!",
+            "Be serious here! This isn't just a game!",
+            "Just tell me what you want!!",
+            "I don't have time for this.."
+    };
+    private String [] limitList = {"That's it, I'm calling the cops...",
+            "I've had enough!!",
+            "I'm done."
+    };
 
 }
