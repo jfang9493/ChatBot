@@ -82,14 +82,15 @@ public class HomeAppBot
 
 		else if (findKeyword(statement, "refrigerator") >= 0 || (findKeyword(statement, "refrigerators") >=0))
 		{
-			response = "My refrigerator recommendation is the SuperFridge9000, it costs $1500 dollars but it is very spacious and has an AI friend to talk to you if you ever get lonely! If that's out of your price range, the NormalFridge2000 costs $800 and is just a normal refrigerator";
-			emotion++;
+			response = "My refrigerator recommendation is the SuperFridge9000, it costs $1500 dollars but it is very spacious and has an AI friend to talk to you if " +
+                       "you ever get lonely! If that's out of your price range, the NormalFridge2000 costs only $800 and is just a normal refrigerator";
 		}
 
 		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		else if (findKeyword(statement, "I want to buy", 0) >= 0)
 		{
-			response = transformIWantToStatement(statement);
+			response = transformIWantToBuyStatement(statement);
+			emotion++;
 		}
 		else if (findKeyword(statement, "I want a",0) >= 0)
 		{
@@ -109,7 +110,7 @@ public class HomeAppBot
 	 * @param statement the user statement, assumed to contain "I want to"
 	 * @return the transformed statement
 	 */
-	private String transformIWantToStatement(String statement)
+	private String transformIWantToBuyStatement(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -120,9 +121,9 @@ public class HomeAppBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
-		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		int psn = findKeyword (statement, "I want to buy", 0);
+		String restOfStatement = statement.substring(psn + 13).trim();
+		return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
 	}
 
 	
