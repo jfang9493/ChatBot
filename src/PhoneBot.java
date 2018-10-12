@@ -21,11 +21,11 @@ public class PhoneBot
 	{
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
-
+        statement = in.nextLine();
 
 		while (!statement.equals("Bye"))
 		{
-
+            System.out.println(getResponse(statement));
 
 			statement = in.nextLine();
 			//getResponse handles the user reply
@@ -41,7 +41,7 @@ public class PhoneBot
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hi, welcome to the phone shop! What can I do for you today?";
 	}
 	
 	/**
@@ -65,7 +65,6 @@ public class PhoneBot
 			response = "Why so negative?";
                 	emotion--;
 		}
-		
 		else if (findKeyword(statement, "levin") >= 0)
 		{
 			response = "More like LevinTheDream, amiright?";
@@ -81,13 +80,12 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
-
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
 			response = transformIWantToStatement(statement);
 		}
-		else if (findKeyword(statement, "I want",0) >= 0)
+		else if (findKeyword(statement, "I want a",0) >= 0)
 		{
 			response = transformIWantStatement(statement);
 		}
@@ -98,7 +96,6 @@ public class PhoneBot
 		else {
 			response = getRandomResponse();
 		}
-		
 		return response;
 	}
 	
@@ -142,7 +139,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want", 0);
+		int psn = findKeyword (statement, "I want a", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
 		return "Would you really be happy if you had " + restOfStatement + "?";
 	}
@@ -187,7 +184,7 @@ public class PhoneBot
 
 		int psnOfIWould = findKeyword (statement, "I would like ", 0);
 
-		String psnOfIWould = statement.substring(psnOfIWould+ 1).trim();
+		String restOfStatement = statement.substring(psnOfIWould+ 1).trim();
 		return "Is this" + restOfStatement + " what you are looking for?";
 	}
 	
