@@ -207,10 +207,10 @@ public class PhoneBot
 
         String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
         if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
-        if (emotion > 0) return "we have Android and Apple phones, take your pick.";
+        if (emotion < 0) return "we have Android and Apple phones, take your pick.";
     }
 
-    private String transformStatement(String statement)
+    private String androidOrAppleStatement(String statement)
     {
         //  Remove the final period, if there is one
         statement = statement.trim();
@@ -221,15 +221,35 @@ public class PhoneBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-
-        int psnOfCheck = findKeyword (statement, "check", 0);
-        int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
+        statement = statement.toLowerCase();
+        int psnOfAndroid = findKeyword (statement, "android", 0);
+        if (psnOfAndroid !>= 0) int psnOfApple = findKeyword(statement, "apple",0);
 
         String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
         if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
-        if (emotion > 0) return "we have Android and Apple phones, take your pick.";
+        if (emotion < 0) return "we have Android and Apple phones, take your pick.";
     }
-	
+
+	private String transformStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+
+		int psnOfCheck = findKeyword (statement, "check", 0);
+		int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
+
+		String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
+		if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
+		if (emotion < 0) return "we have Android and Apple phones, take your pick.";
+	}
+
 	/**
 	 * Search for one word in phrase. The search is not case
 	 * sensitive. This method will check that the given goal
