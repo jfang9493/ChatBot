@@ -154,6 +154,8 @@ public class GameBot
 	 */
     private String recommendGames(String statement)
     {
+    	String suggest = "";
+		Random r = new Random ();
         //  Remove the final period, if there is one
         statement = statement.trim();
         String lastChar = statement.substring(statement
@@ -163,7 +165,23 @@ public class GameBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-        return "So you really like to play" + statement + "? I see. I would suggest you to play";
+        if(statement == "FPS")
+		{
+			suggest = randomFPSGame [r.nextInt(randomFPSGame.length)];
+		}
+		if(statement == "MOBA")
+		{
+			suggest = randomMOBAGame [r.nextInt(randomMOBAGame.length)];
+		}
+		if(statement == "RPG")
+		{
+			suggest = randomRPGGame [r.nextInt(randomRPGGame.length)];
+		}
+		if(statement == "Card")
+		{
+			suggest = randomCardGame [r.nextInt(randomCardGame.length)];
+		}
+        return "So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest;
     }
 	private String transformIWantToPlayStatement(String statement)
 	{
@@ -317,5 +335,8 @@ public class GameBot
 	};
 	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"I would be happy to serve you anytime.", "Feels good to find someone interested in this", "You make me feel like a brand new pair of shoes."};
-	
+	private String [] randomFPSGame = {"OverWatch","PUBG","Tom Clancy's Rainbow Six Siege",};
+	private String [] randomRPGGame = {"World of Warcraft","Blade and Soul","MapleStory 2"};
+	private String [] randomMOBAGame = {"League of Legends","DOTA2","Hero Of The Storm"};
+	private String [] randomCardGame = {"Hearthstone","UNO","Yo-Gi-Yu"};
 }
