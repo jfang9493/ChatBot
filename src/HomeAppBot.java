@@ -74,7 +74,7 @@ public class HomeAppBot
 			emotion++;
 		}
 
-		else if ((findKeyword(statement, "what") >= 0 && (findKeyword(statement, "sell")) >= 0))
+		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
 		{
 			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, microwaves, and more! What would you like to know about?";
 			emotion++;
@@ -297,15 +297,15 @@ public class HomeAppBot
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
+	private String [] randomNeutralResponses = {"What would you like to purchase?",
+			"I'm sorry, I don;t understand",
 			"Do you really think so?",
 			"You don't say.",
-			"It's all boolean to me.",
+			"It's all not boolean to me... because I am a real person of course.",
 			"So, would you like to go for a walk?",
-			"Could you say that again?"
+			"Could you rephrase your statement?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"You are making it very difficult for me to help you", "Could we please stay on topic?", "The rage consumes me!"};
+	private String [] randomHappyResponses = {"I'm glad to see I am helping", "Is there anything else I can do for you?", "You make me feel like a brand new pair of shoes."};
 	
 }
