@@ -230,8 +230,8 @@ public class PhoneBot
 		}
     }*/
 
-	private String transformStatement(String statement)
-	/**{
+	/**private String transformStatement(String statement)
+	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
