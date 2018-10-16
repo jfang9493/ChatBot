@@ -231,7 +231,7 @@ public class PhoneBot
     }*/
 
 	private String transformStatement(String statement)
-	{
+	/**{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
@@ -248,7 +248,7 @@ public class PhoneBot
 		String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
 		if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
 		if (emotion < 0) return "we have Android and Apple phones, take your pick.";
-	}
+	}*/
 
 	/**
 	 * Search for one word in phrase. The search is not case
