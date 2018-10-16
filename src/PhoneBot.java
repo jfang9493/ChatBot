@@ -22,16 +22,15 @@ public class PhoneBot
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
 
-		while (!statement.equals("Bye"))
+		while (!statement.equals("Bye") && !statement.equals("change store"))
 		{
 
 			statement = in.nextLine();
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
 
-
 		}
-
+		System.out.println("Which store would you like to visit now? The other stores are for groceries, games, and home appliances.");
 	}
 	/**
 	 * Get a default greeting 	
