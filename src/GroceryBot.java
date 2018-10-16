@@ -1,4 +1,4 @@
-
+// Brandon Smith
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,7 +12,8 @@ public class GroceryBot
 {
     //emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
     int emotion = 0;
-
+    //conversation changes depending on which type you're looking for.
+    int path = 0;
     /**
      * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
      * @param statement the statement typed by the user
@@ -34,7 +35,7 @@ public class GroceryBot
         if(emotion == -10){
             System.out.println("You were kicked out of the grocery store.");
         } else {
-            System.out.println("Oh understandable have a nice day.");
+            System.out.println("Understandable, have a nice day.");
         }
         System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
     }
@@ -44,7 +45,8 @@ public class GroceryBot
      */
     public String getGreeting()
     {
-        return "Hello there, and welcome to Smith and Sons International Grocers! What category of groceries are you looking for?";
+        return "Hello there, and welcome to Smith and Sons International Grocers! What category of groceries are you looking for? " +
+                "We have beverages, bakery items, canned goods, dairy items, dry goods, frozen foods, meat, produce, cleaners, paper goods and personal care.";
     }
 
     /**
@@ -94,6 +96,9 @@ public class GroceryBot
         {
             response = transformIWantStatement(statement);
         }*/
+        else if (findKeyword(statement, "hot", 0) >= 0){
+            response = transformHotStatement(statement);
+        }
         else if (findKeyword(statement, "I am looking for",0) >= 0)
         {
             response = transformIAmLookingForStatement(statement);
