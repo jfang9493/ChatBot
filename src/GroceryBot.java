@@ -38,6 +38,7 @@ public class GroceryBot
             System.out.println("Understandable, have a nice day.");
         }
         System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
+        System.out.println(statement);
     }
     /**
      * Get a default greeting
@@ -96,12 +97,42 @@ public class GroceryBot
         {
             response = transformIWantStatement(statement);
         }*/
-        else if (findKeyword(statement, "hot", 0) >= 0){
-            response = transformHotStatement(statement);
-        }
         else if (findKeyword(statement, "I am looking for",0) >= 0)
         {
             response = transformIAmLookingForStatement(statement);
+        }
+        else if (findKeyword(statement, "beverages",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "bakery items",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "canned goods",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "dairy items",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "dry goods",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "frozen foods",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "meat",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "produce",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "cleaners",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "paper goods",0) >= 0){
+
+        }
+        else if (findKeyword(statement, "personal care",0) >= 0){
+
         }
         else
         {
