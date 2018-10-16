@@ -82,6 +82,15 @@ public class PhoneBot
         {
             return customerCheckPhonesStatement(statement);
         }
+        else if (findKeyword(statement, "Android", 0) >= 0)
+		{
+			return findAndroidStatement(statement);
+		}
+		else if (findKeyword(statement, "Apple", 0) >= 0)
+		{
+			return findAppleStatement(statement);
+		}
+
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -201,15 +210,13 @@ public class PhoneBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-
         int psnOfCheck = findKeyword (statement, "check", 0);
         int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
-
         String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
         return "Great! Are you looking for an Android or an Apple phone?";
     }
 
-    /**private String androidOrAppleStatement(String statement)
+    private String findAppleStatement(String statement)
     {
         //  Remove the final period, if there is one
         statement = statement.trim();
@@ -221,16 +228,10 @@ public class PhoneBot
                     .length() - 1);
         }
         statement = statement.toLowerCase();
-		int psnOfAndroid = findKeyword (statement, "android", 0);
-		int psnOfApple = findKeyword(statement, "apple",0);
-		return "For Android phones, we have the Samsung Galaxy S9, Google Pixel 3, and the LG V40. Which one would you like?";
-        if (psnOfAndroid < 0 )
-		{
-			return "For Apple phones, we have the new iPhone XS, XS Max, and XR. Which one would you like?";
-		}
-    }*/
+        return "For Apple phones, we have the new iPhone XS, XS Max, and XR. Would you like one?";
+    }
 
-	/**private String transformStatement(String statement)
+	private String findAndroidStatement(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -241,14 +242,9 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-
-		int psnOfCheck = findKeyword (statement, "check", 0);
-		int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
-
-		String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
-		if (emotion >= 0) return "Great! Are you looking for an Android or an Apple phone?";
-		if (emotion < 0) return "we have Android and Apple phones, take your pick.";
-	}*/
+		statement = statement.toLowerCase();
+		return "For Android phones, we have the Samsung Galaxy S9, Google Pixel 3, and the LG V40. Would you like one?";
+	}
 
 	/**
 	 * Search for one word in phrase. The search is not case

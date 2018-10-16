@@ -76,7 +76,7 @@ public class HomeAppBot
 
 		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
 		{
-			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, microwaves, and more! What would you like to know about?";
+			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
 			emotion++;
 		}
 
@@ -85,6 +85,11 @@ public class HomeAppBot
 			response = "My refrigerator recommendation is the SuperFridge9000, it costs $1500 dollars but it is very spacious and has an AI friend to talk to you if " +
                        "you ever get lonely! If that's out of your price range, the NormalFridge2000 costs only $800 and is just a normal refrigerator";
 		}
+
+		else if (findKeyword(statement, "toaster") >= 0 || (findKeyword(statement, "toasters") >= 0))
+        {
+            response = "My favorite toaster is the 4 Slot Flamer 2018, but we also have the 2 Slot Flamer 2018 and the ToastMaster General. Which would you like to know about?";
+        }
 
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to buy", 0) >= 0)
@@ -298,14 +303,14 @@ public class HomeAppBot
 	}
 	
 	private String [] randomNeutralResponses = {"What would you like to purchase?",
-			"I'm sorry, I don;t understand",
-			"Do you really think so?",
+			"I'm sorry, I don't understand",
+			"Excuse me?",
 			"You don't say.",
-			"It's all not boolean to me... because I am a real person of course.",
+			"It's all not boolean to me... because I am a real person of course",
 			"So, would you like to go for a walk?",
 			"Could you rephrase your statement?"
 	};
-	private String [] randomAngryResponses = {"You are making it very difficult for me to help you", "Could we please stay on topic?", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"I'm glad to see I am helping", "Is there anything else I can do for you?", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"You are making it very difficult for me to help you", "Could we please stay on topic?", "I'm sorry, we don't sell our appliances to MEANIES!"};
+	private String [] randomHappyResponses = {"I'm glad to see I am helping", "Is there anything else I can do for you?", "I would really love to help but I need you to help me help you"};
 	
 }
