@@ -12,7 +12,6 @@ public class GameBot
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
     int randomResponse = 0;
-    private String [] randomRPGGames = {"World of Warcraft"," Blade And Soul"};
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
 	 * @param statement the statement typed by the user
@@ -20,20 +19,24 @@ public class GameBot
 	public void gameLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
+		emotion = 0;
 		System.out.println (getGreeting());
+		statement = in.nextLine();
 
-
-		while (!statement.equals("Bye"))
+		while (!statement.equals("Bye") && !statement.equals("change store") && emotion != -10)
 		{
-
-
-			statement = in.nextLine();
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
-
-
+			if(emotion != -10)
+				statement = in.nextLine();
 		}
-
+		if(emotion == -10){
+			System.out.println("Yeah we dont really want you here as well.");
+		} else {
+			System.out.println("Understandable, have a nice day.");
+		}
+		System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
+		System.out.println(statement);
 	}
 	/**
 	 * Get a default greeting 	
@@ -75,7 +78,7 @@ public class GameBot
 
 		else if (findKeyword(statement, "yes") >= 0)
 		{
-			response = "So what kind of game would u like to buy? We have RPG, MOBA, Card, FPS, and Action";
+			response = "So what kind of game would u like to buy? We have RPG, MOBA, Card,and FPS";
 			emotion++;
 		}
 		// Response transforming I want to statement
@@ -102,6 +105,7 @@ public class GameBot
         else if (findKeyword(statement, "MOBA", 0) >= 0)
         {
             response = recommendGames(statement);
+            emotion ++;
         }
         else if (findKeyword(statement, "FPS", 0) >= 0)
         {
@@ -165,19 +169,19 @@ public class GameBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-        if(statement == "FPS")
+        if(statement.equals("FPS"))
 		{
 			suggest = randomFPSGame [r.nextInt(randomFPSGame.length)];
 		}
-		if(statement == "MOBA")
+		if(statement.equals("MOBA"))
 		{
 			suggest = randomMOBAGame [r.nextInt(randomMOBAGame.length)];
 		}
-		if(statement == "RPG")
+		if(statement.equals("RPG"))
 		{
 			suggest = randomRPGGame [r.nextInt(randomRPGGame.length)];
 		}
-		if(statement == "Card")
+		if(statement.equals("Card"))
 		{
 			suggest = randomCardGame [r.nextInt(randomCardGame.length)];
 		}
@@ -325,16 +329,17 @@ public class GameBot
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
-			"Why though",
-			"Why so ?",
-			"It's all boolean to me.",
+	private String [] randomNeutralResponses = {"So be it.",
+			"uhm... I would like to know more",
+			"Why though?",
+			"Why is it ?",
+			"Can you explain more?.",
 			"Take your time.",
-			"Uhm, interesting"
+			"Uhm, interesting",
+			"i'm willing to hear more"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"I would be happy to serve you anytime.", "Feels good to find someone interested in this", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"Please don't make me get mad more.", "I don't like that", "please say something useful"};
+	private String [] randomHappyResponses = {"I would be happy to serve you anytime.", "Feels good to find someone interested in this", "You make me feel like we know each other."};
 	private String [] randomFPSGame = {"OverWatch","PUBG","Tom Clancy's Rainbow Six Siege",};
 	private String [] randomRPGGame = {"World of Warcraft","Blade and Soul","MapleStory 2"};
 	private String [] randomMOBAGame = {"League of Legends","DOTA2","Hero Of The Storm"};
