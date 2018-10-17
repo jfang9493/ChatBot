@@ -14,6 +14,8 @@ public class GroceryBot
     int emotion = 0;
     //conversation changes depending on which type you're looking for.
     int path = 0;
+    String category;
+    String statement1;
     /**
      * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
      * @param statement the statement typed by the user
@@ -38,7 +40,6 @@ public class GroceryBot
             System.out.println("Understandable, have a nice day.");
         }
         System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
-        System.out.println(statement);
     }
     /**
      * Get a default greeting
@@ -97,56 +98,72 @@ public class GroceryBot
         {
             response = transformIWantStatement(statement);
         }*/
-        else if (path == 1){
-            response = "It would be nice if we had " + statement.trim() + " wouldn't it?";
-            path++;
-        }
         else if (findKeyword(statement, "I am looking for",0) >= 0)
         {
             response = transformIAmLookingForStatement(statement);
         }
         else if (findKeyword(statement, "beverages",0) >= 0 && path == 0){
             response = "What kind of beverage? We have coffee, tea, juice, and soda.";
+            category = "A";
             path++;
         }
         else if (findKeyword(statement, "bakery items",0) >= 0 && path == 0){
             response = "What kind of bakery item? We have sandwich loaves, dinner rolls, tortillas and bagels.";
+            category = "B";
             path++;
         }
         else if (findKeyword(statement, "canned goods",0) >= 0 && path == 0){
             response = "What kind of canned good? We have vegetables, spaghetti sauce and ketchup.";
+            category = "C";
             path++;
         }
         else if (findKeyword(statement, "dairy items",0) >= 0 && path == 0){
             response = "What kind of dairy item? We have cheese, eggs, milk, yogurt and butter.";
+            category = "D";
             path++;
         }
         else if (findKeyword(statement, "dry goods",0) >= 0 && path == 0){
             response = "What kind of dry good? We have cereal, flour, sugar, pasta and mixes.";
+            category = "E";
             path++;
         }
         else if (findKeyword(statement, "frozen foods",0) >= 0 && path == 0){
             response = "What kind of frozen food? We have waffles, vegetables, individual meals and ice cream.";
+            category = "F";
             path++;
         }
         else if (findKeyword(statement, "meat",0) >= 0 && path == 0){
             response = "What kind of bakery item? We have lunch meat, poultry, beef, pork";
+            category = "G";
             path++;
         }
         else if (findKeyword(statement, "produce",0) >= 0 && path == 0){
             response = "What kind of produce? We have fruits and vegetables.";
+            category = "H";
             path++;
         }
         else if (findKeyword(statement, "cleaners",0) >= 0 && path == 0){
             response = "What kind of cleaner? We have all- purpose, laundry detergent and dishwashing liquid/detergent.";
+            category = "I";
             path++;
         }
         else if (findKeyword(statement, "paper goods",0) >= 0 && path == 0){
             response = "What kind of paper good? We have paper towels, toilet paper, aluminum foil and sandwich bags.";
+            category = "J";
             path++;
         }
-        else if (findKeyword(statement, "personal care",0) >= 0 && path == 0){
+        else if (findKeyword(statement, "personal care",0) >= 0 && path == 0) {
             response = "What kind of personal care item? We have shampoo, soap, hand soap and shaving cream.";
+            category = "K";
+            path++;
+        }
+        else if (path == 1){
+            statement1 = statement.trim();
+            response = "It would be nice if we had " + statement1 + " wouldn't it?";
+            path++;
+        }
+        else if (path == 2){
+            response = "Well, we should have " + statement1 + " in isle " + category + ". What would you want to do now?";
             path++;
         }
         else
@@ -350,7 +367,6 @@ public class GroceryBot
     {
         return findKeyword (statement, goal, 0);
     }
-
 
 
     /**
