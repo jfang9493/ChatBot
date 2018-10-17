@@ -42,7 +42,6 @@ public class ChatBotRunner {
                 statement = in.nextLine();
             }
             if(!statement.equals("phones")||!statement.equals("games")||!statement.equals("home appliances")||!statement.equals("groceries")){
-                System.out.println(statement);
                 System.out.println("Sorry, we don't have this here, please choose from phones, games, home appliances, or groceries");
                 statement = in.nextLine();
             }
