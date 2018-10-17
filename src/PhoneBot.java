@@ -85,11 +85,14 @@ public class PhoneBot
 		{
 			return customerSeePhonesStatement(statement);
 		}
-        else if (findKeyword(statement, "Android", 0) >= 0)
+        else if (findKeyword(statement, "", 0) >= 0)
 		{
-			return findAndroidStatement(statement);
+			return (statement);
 		}
-
+		else if (findKeyword(statement, "how much is", 0) >= 0)
+		{
+			return phonePriceStatement(statement);
+		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -209,7 +212,7 @@ public class PhoneBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-        return "Great! Our selection of Android phones include the Samsung Galaxy S9, Google Pixel 2, and the LG V30. We're having a special so each phones only costs $600! Would you like one?";
+        return "Great! Our selection of Android phones include the Samsung Galaxy S9, the Google Pixel 3, and the LG V40. Would you like one?";
     }
 
 	private String customerSeePhonesStatement(String statement)
@@ -223,22 +226,34 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the the Samsung Galaxy S9, Google Pixel 2, and the LG V30.";
+		return "We have the the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would you like to pick one?";
 	}
 
-	private String findAndroidStatement(String statement)
+	private String phonePriceStatement(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
 				.length() - 1);
-		if (lastChar.equals("."))
+		if (lastChar.equals(".") || lastChar.equals("?"))
 		{
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
 		statement = statement.toLowerCase();
-		return "For Android phones, we have the Samsung Galaxy S9, Google Pixel 3, and the LG V40. Would you like one?";
+		if (findKeyword(statement, "google pixel 3",0) >=0)
+		{
+			return "The Google Pixel 3 costs $1000. Is there anything else you would like?";
+		}
+		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		{
+			return "The Samsung Galaxy S9 costs $800. Is there anything else you would like?";
+		}
+		else if (findKeyword(statement, "lg v40",0) >=0)
+		{
+			return "The LG V40 costs $900. Is there anything else you would like?";
+		}
+		else return "I'm sorry, I don't think I understand that";
 	}
 
 	/**
