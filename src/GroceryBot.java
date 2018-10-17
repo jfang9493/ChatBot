@@ -97,42 +97,57 @@ public class GroceryBot
         {
             response = transformIWantStatement(statement);
         }*/
+        else if (path == 1){
+            response = "It would be nice if we had " + statement.trim() + " wouldn't it?";
+            path++;
+        }
         else if (findKeyword(statement, "I am looking for",0) >= 0)
         {
             response = transformIAmLookingForStatement(statement);
         }
-        else if (findKeyword(statement, "beverages",0) >= 0){
-
+        else if (findKeyword(statement, "beverages",0) >= 0 && path == 0){
+            response = "What kind of beverage? We have coffee, tea, juice, and soda.";
+            path++;
         }
-        else if (findKeyword(statement, "bakery items",0) >= 0){
-
+        else if (findKeyword(statement, "bakery items",0) >= 0 && path == 0){
+            response = "What kind of bakery item? We have sandwich loaves, dinner rolls, tortillas and bagels.";
+            path++;
         }
-        else if (findKeyword(statement, "canned goods",0) >= 0){
-
+        else if (findKeyword(statement, "canned goods",0) >= 0 && path == 0){
+            response = "What kind of canned good? We have vegetables, spaghetti sauce and ketchup.";
+            path++;
         }
-        else if (findKeyword(statement, "dairy items",0) >= 0){
-
+        else if (findKeyword(statement, "dairy items",0) >= 0 && path == 0){
+            response = "What kind of dairy item? We have cheese, eggs, milk, yogurt and butter.";
+            path++;
         }
-        else if (findKeyword(statement, "dry goods",0) >= 0){
-
+        else if (findKeyword(statement, "dry goods",0) >= 0 && path == 0){
+            response = "What kind of dry good? We have cereal, flour, sugar, pasta and mixes.";
+            path++;
         }
-        else if (findKeyword(statement, "frozen foods",0) >= 0){
-
+        else if (findKeyword(statement, "frozen foods",0) >= 0 && path == 0){
+            response = "What kind of frozen food? We have waffles, vegetables, individual meals and ice cream.";
+            path++;
         }
-        else if (findKeyword(statement, "meat",0) >= 0){
-
+        else if (findKeyword(statement, "meat",0) >= 0 && path == 0){
+            response = "What kind of bakery item? We have lunch meat, poultry, beef, pork";
+            path++;
         }
-        else if (findKeyword(statement, "produce",0) >= 0){
-
+        else if (findKeyword(statement, "produce",0) >= 0 && path == 0){
+            response = "What kind of produce? We have fruits and vegetables.";
+            path++;
         }
-        else if (findKeyword(statement, "cleaners",0) >= 0){
-
+        else if (findKeyword(statement, "cleaners",0) >= 0 && path == 0){
+            response = "What kind of cleaner? We have all- purpose, laundry detergent and dishwashing liquid/detergent.";
+            path++;
         }
-        else if (findKeyword(statement, "paper goods",0) >= 0){
-
+        else if (findKeyword(statement, "paper goods",0) >= 0 && path == 0){
+            response = "What kind of paper good? We have paper towels, toilet paper, aluminum foil and sandwich bags.";
+            path++;
         }
-        else if (findKeyword(statement, "personal care",0) >= 0){
-
+        else if (findKeyword(statement, "personal care",0) >= 0 && path == 0){
+            response = "What kind of personal care item? We have shampoo, soap, hand soap and shaving cream.";
+            path++;
         }
         else
         {
@@ -235,7 +250,28 @@ public class GroceryBot
         String restOfStatement = statement.substring(psn + 16).trim();
         return "What kind of " + restOfStatement + "?";
     }
+    /**
+     * Take a statement with "beverage" and transform it into
+     * "What kind of beverage? We have coffee, tea, juice, and soda."
+     * @param statement the user statement, possibly containing "beverage"
+     * @return the transformed statement
+     */
+    private String transformBeverageStatement(String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
 
+        int psn = findKeyword (statement, "beverage", 0);
+        String restOfStatement = statement.substring(psn + 8).trim();
+        return "What kind of " + restOfStatement + "? We have coffee, tea, juice, and soda.";
+    }
 
 
     /**
