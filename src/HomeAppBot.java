@@ -25,16 +25,16 @@ public class HomeAppBot
 		System.out.println (getGreeting());
 
 
-		while (!statement.equals("Bye"))
+		while (!statement.equals("Bye") && !statement.equals("change store"))
 		{
-
-
-			statement = in.nextLine();
 			//getResponse handles the user reply
+			statement = in.nextLine();
 			System.out.println(getResponse(statement));
 
-
 		}
+
+		System.out.println("Understandable, have a nice day.");
+		System.out.println("Which store would you like to visit now? The other stores are for phones, games, and groceries.");
 
 	}
 	/**
@@ -117,6 +117,7 @@ public class HomeAppBot
 	 */
 	private String transformIWantToBuyStatement(String statement)
 	{
+		String[] products = {"SuperFridge9000", "NormalFridge2000", "4 Slot Flamer 2018", "2 Slot Flamer 2018", "ToastMaster General"};
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
@@ -128,6 +129,21 @@ public class HomeAppBot
 		}
 		int psn = findKeyword (statement, "I want to buy", 0);
 		String restOfStatement = statement.substring(psn + 13).trim();
+
+		String cutThe = restOfStatement.substring(4);
+		String cutA = restOfStatement.substring(2);
+
+		for(int i = 0; i < products.length; i++)
+		{
+			if(restOfStatement.equalsIgnoreCase(products[i])==true || cutThe.equalsIgnoreCase(products[i])==true || cutA.equalsIgnoreCase(products[i])==true)
+			{
+				return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
+			}
+			else
+			{
+				return "I'm sorry, we don't have " + restOfStatement + " in stock. Would you like to purchase a different product?";
+			}
+		}
 		return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
 	}
 
