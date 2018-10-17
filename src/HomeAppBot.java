@@ -74,12 +74,6 @@ public class HomeAppBot
 			emotion++;
 		}
 
-		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
-		{
-			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
-			emotion++;
-		}
-
 		else if (findKeyword(statement, "refrigerator") >= 0 || (findKeyword(statement, "refrigerators") >=0))
 		{
 			response = "My refrigerator recommendation is the SuperFridge9000, it costs $1500 dollars but it is very spacious and has an AI friend to talk to you if " +
@@ -90,6 +84,12 @@ public class HomeAppBot
         {
             response = "My favorite toaster is the 4 Slot Flamer 2018, but we also have the 2 Slot Flamer 2018 and the ToastMaster General. Which would you like to know about?";
         }
+
+		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
+		{
+			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
+			emotion++;
+		}
 
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to buy", 0) >= 0)
@@ -130,21 +130,25 @@ public class HomeAppBot
 		int psn = findKeyword (statement, "I want to buy", 0);
 		String restOfStatement = statement.substring(psn + 13).trim();
 
-		String cutThe = restOfStatement.substring(4);
-		String cutA = restOfStatement.substring(2);
+		int inStock = 0;
 
 		for(int i = 0; i < products.length; i++)
 		{
-			if(restOfStatement.equalsIgnoreCase(products[i])==true || cutThe.equalsIgnoreCase(products[i])==true || cutA.equalsIgnoreCase(products[i])==true)
+			if(findKeyword(statement, products[i]) >= 0)
 			{
-				return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
+				inStock ++;
 			}
 			else
 			{
-				return "I'm sorry, we don't have " + restOfStatement + " in stock. Would you like to purchase a different product?";
+				inStock += 0;
 			}
 		}
-		return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
+		if(inStock == 1)
+		{
+			return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
+		}
+
+		return "I'm sorry, we don't have " + restOfStatement + " in stock. Do you want to purchase a different product?";
 	}
 
 	
@@ -313,12 +317,25 @@ public class HomeAppBot
 		}
 		if (emotion < 0)
 		{	
+			if (emotion < -10)
+			{
+				return randomVeryAngryResponses [r.nextInt(randomVeryAngryResponses.length)];
+			}
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
-		}	
-		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
+		}
+		if (emotion > 10)
+		{
+			if (emotion > 50)
+			{
+				return "Listen, this might be out of nowhere but I have something I really need to say. You are a really really great person and, although we haven't known each other for long, I feel like I really know you. So I must ask, will you marry me?";
+			}
+			return randomVeryHappyResponses[r.nextInt(randomVeryHappyResponses.length)];
+		}
+		return randomHappyResponses[r.nextInt(randomHappyResponses.length)];
+
 	}
 	
-	private String [] randomNeutralResponses = {"What would you like to purchase?",
+	private String [] randomNeutralResponses = {"What do you want to purchase?",
 			"I'm sorry, I don't understand",
 			"Excuse me?",
 			"You don't say.",
@@ -328,5 +345,7 @@ public class HomeAppBot
 	};
 	private String [] randomAngryResponses = {"You are making it very difficult for me to help you", "Could we please stay on topic?", "I'm sorry, we don't sell our appliances to MEANIES!"};
 	private String [] randomHappyResponses = {"I'm glad to see I am helping", "Is there anything else I can do for you?", "I would really love to help but I need you to help me help you"};
-	
+	private String [] randomVeryAngryResponses = {"I hate you", "PLEASE LEAVE THIS CHAT", "If you do not stop harassing me I'm going to alert the authorities"};
+	private String [] randomVeryHappyResponses = {"I love you", "Do you maybe wanna hang out sometime? You seem like a really cool person",
+			"You have been so great and I really appreciate you",};
 }
