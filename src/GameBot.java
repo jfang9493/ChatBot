@@ -1,21 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * A program to carry on conversations with a human user.
- * This version:
- * @author Brooklyn Tech CS Department
- * @version September 2018
- */
 public class GameBot
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
     int randomResponse = 0;
-	/**
-	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
-	 * @param statement the statement typed by the user
-	 */
 	public void gameLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
@@ -31,20 +21,18 @@ public class GameBot
 				statement = in.nextLine();
 		}
 		if(emotion == -10){
-			System.out.println("Yeah we dont really want you here as well.");
+			System.out.println("Yeah we dont really want you here.Please leave as soon as you can." +
+                    "System Message: You have been kicked out from the store GameStart");
 		} else {
 			System.out.println("Understandable, have a nice day.");
 		}
 		System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
 		System.out.println(statement);
 	}
-	/**
-	 * Get a default greeting 	
-	 * @return a greeting
-	 */	
+
 	public String getGreeting()
 	{
-		return "Hi, what can you help you with today at GameStart today?";
+		return "Hi, what can you help you with today at GameStart today? I am here to help. Would you like Buy a game";
 	}
 	
 	/**
@@ -58,45 +46,32 @@ public class GameBot
 	{
 		String response = "";
 		
-		if (statement.length() == 0)
+		if (statement.length() > 0)
 		{
-			response = "So you don't like to play games?";
-            emotion--;
+            emotion++;
 		}
-
-		else if (findKeyword(statement, "no") >= 0)
+        if (statement.length() == 0)
+        {
+            emotion--;
+        }
+		else if (findKeyword(statement, "no") >= 0&&statement.length() == 0)
 		{
 			response = "Why don't you enjoy game?";
                 	emotion--;
 		}
-		
-		else if (findKeyword(statement, "buy") >= 0)
-		{
-			response = "So what kind of game would u like to buy?";
-			emotion++;
-		}
-
 		else if (findKeyword(statement, "yes") >= 0)
 		{
 			response = "So what kind of game would u like to buy? We have RPG, MOBA, Card,and FPS";
 			emotion++;
 		}
 		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		else if (findKeyword(statement, "I want to buy", 0) >= 0)
 		{
 			response = transformIWantToBuyStatement(statement);
 		}
-		else if (findKeyword(statement, "I want",0) >= 0)
+		else if (findKeyword(statement, "I want to play",0) >= 0)
 		{
 			response = transformIWantToPlayStatement(statement);
-		}
-		else if (findKeyword(statement, "I",0) >= 0)
-		{
-			response = transformIYouStatement(statement);
-		}
-		else if (findKeyword(statement, "you",0) >= 0)
-		{
-			response = transformIYouStatement(statement);
 		}
         else if (findKeyword(statement, "RPG", 0) >= 0)
         {
@@ -110,14 +85,16 @@ public class GameBot
         else if (findKeyword(statement, "FPS", 0) >= 0)
         {
             response = recommendGames(statement);
+            emotion ++;
         }
         else if (findKeyword(statement, "Card", 0) >= 0)
         {
             response = recommendGames(statement);
+            emotion ++;
         }
         else if (randomResponse >= 5)
         {
-            response = "I would recommend some Awesome games for you. What kind of game do you like ? RPG ? FPS ? Card? or MOBA?";
+            response = "I would recommend some Awesome games for you. What kind of game do you like again? RPG ? FPS ? Card? or MOBA?";
         }
 		else
 		{
@@ -146,6 +123,7 @@ public class GameBot
 		}
 		int psn = findKeyword (statement, "I want to buy", 0);
 		String restOfStatement = statement.substring(psn + 13).trim();
+		randomResponse++;
 		return "Why do you like to buy " + restOfStatement + "?";
 	}
 
@@ -171,21 +149,45 @@ public class GameBot
         }
         if(statement.equals("FPS"))
 		{
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomFPSGame [r.nextInt(randomFPSGame.length)];
+            System.out.println("Would you like to know more about this game?");
+            if(statement.equals("yes"))
+            {
+                System.out.println("Theses games are usually about gun fights either in real life or fantasy. It consist of strategy based game play for either Attacking or Defending side, and the well performing your team members. Reaction and mouse control is also important for a good FPS player to destroy their enemy");
+            }
 		}
 		if(statement.equals("MOBA"))
 		{
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomMOBAGame [r.nextInt(randomMOBAGame.length)];
+            System.out.println("Would you like to know more about this game?");
+            if(statement.equals("yes"))
+            {
+                System.out.println("This type of games are challenging but also fun for players who want skill based competition with other players online. The victory of 1 game is determine by how well you know the mechanic of the game, strategy you perform and teamwork of you other 4 team members.");
+            }
 		}
 		if(statement.equals("RPG"))
 		{
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomRPGGame [r.nextInt(randomRPGGame.length)];
+            System.out.println("Would you like to know more about this game?");
+            if(statement.equals("yes"))
+            {
+                System.out.println("This kind of games is fun for people who like to make a character in a different world. You can build up your character, make friends with other players, and have group events such as raiding. This type of game usually uses more time as if you are living in that world.");
+            }
 		}
 		if(statement.equals("Card"))
 		{
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomCardGame [r.nextInt(randomCardGame.length)];
+            System.out.println("Would you like to know more about this game?");
+            if(statement.equals("yes"))
+            {
+                System.out.println("Card games like this are fun because of how you can get collect rare cards from the store using the currency in the game. The currency is gained by playing games with other players online using a set of deck you make to perform strategy that can defeat the enemy through care thought proccess");
+            }
 		}
-        return "So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest;
+        return "would you like to know more about this game?";
     }
 	private String transformIWantToPlayStatement(String statement)
 	{
@@ -200,6 +202,7 @@ public class GameBot
 		}
 		int psn = findKeyword (statement, "I want to play", 0);
 		String restOfStatement = statement.substring(psn + 13).trim();
+        randomResponse++;
 		return "So you really like to play " + restOfStatement + "? I see.";
 	}
 	
@@ -210,24 +213,6 @@ public class GameBot
 	 * @param statement the user statement, assumed to contain "I" followed by "you"
 	 * @return the transformed statement
 	 */
-	private String transformIYouStatement(String statement)
-	{
-		//  Remove the final period, if there is one
-		statement = statement.trim();
-		String lastChar = statement.substring(statement
-				.length() - 1);
-		if (lastChar.equals("."))
-		{
-			statement = statement.substring(0, statement
-					.length() - 1);
-		}
-		
-		int psnOfI = findKeyword (statement, "I", 0);
-		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
-		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
-	}
 	
 
 	
@@ -339,9 +324,9 @@ public class GameBot
 			"i'm willing to hear more"
 	};
 	private String [] randomAngryResponses = {"Please don't make me get mad more.", "I don't like that", "please say something useful"};
-	private String [] randomHappyResponses = {"I would be happy to serve you anytime.", "Feels good to find someone interested in this", "You make me feel like we know each other."};
-	private String [] randomFPSGame = {"OverWatch","PUBG","Tom Clancy's Rainbow Six Siege",};
+	private String [] randomHappyResponses = {"I am really happy right now.", "Feels good to find someone interested in this", "You make me feel like we know each other."};
+	private String [] randomFPSGame = {"OverWatch","PUBG","Tom Clancy's Rainbow Six Siege","CounterStrike: Global Offence","Destiny 2","Call Of Duty: BlackOPS"};
 	private String [] randomRPGGame = {"World of Warcraft","Blade and Soul","MapleStory 2"};
 	private String [] randomMOBAGame = {"League of Legends","DOTA2","Hero Of The Storm"};
-	private String [] randomCardGame = {"Hearthstone","UNO","Yo-Gi-Yu"};
+	private String [] randomCardGame = {"Hearthstone","UNO","Yo-Gi-Yu","Pokemon Card Games"};
 }
