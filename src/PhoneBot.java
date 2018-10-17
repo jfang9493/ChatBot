@@ -12,25 +12,26 @@ public class PhoneBot
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
+	int cart = 0;
 
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
 	 * @param statement the statement typed by the user
 	 */
-	public void chatLoop(String statement)
+	public void phoneLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
+		emotion = 0;
 		System.out.println (getGreeting());
-
+		statement = in.nextLine();
 		while (!statement.equals("Bye") && !statement.equals("change store"))
 		{
-
-			statement = in.nextLine();
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
-
+				statement = in.nextLine();
 		}
-		System.out.println("Which store would you like to visit now? The other stores are for groceries, games, and home appliances.");
+		System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
+		System.out.println(statement);
 	}
 	/**
 	 * Get a default greeting 	
@@ -85,9 +86,13 @@ public class PhoneBot
 		{
 			return customerSeePhonesStatement(statement);
 		}
-        else if (findKeyword(statement, "", 0) >= 0)
+        else if (findKeyword(statement, "buy a phone", 0) >= 0)
 		{
-			return (statement);
+			return customerBuyPhoneStatement(statement);
+		}
+		else if (findKeyword(statement, "buy phones", 0) >= 0)
+		{
+			return customerBuyPhoneStatement(statement);
 		}
 		else if (findKeyword(statement, "how much is", 0) >= 0)
 		{
@@ -243,17 +248,43 @@ public class PhoneBot
 		statement = statement.toLowerCase();
 		if (findKeyword(statement, "google pixel 3",0) >=0)
 		{
-			return "The Google Pixel 3 costs $1000. Is there anything else you would like?";
+			return "The Google Pixel 3 costs $1000. Is there anything else you need help with?";
 		}
 		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
 		{
-			return "The Samsung Galaxy S9 costs $800. Is there anything else you would like?";
+			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
 		}
 		else if (findKeyword(statement, "lg v40",0) >=0)
 		{
-			return "The LG V40 costs $900. Is there anything else you would like?";
+			return "The LG V40 costs $900. Is there anything else you need help with?";
 		}
 		else return "I'm sorry, I don't think I understand that";
+	}
+
+	private String customerBuyPhoneStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		{
+			cart += 1000;
+			return "That will bring your cart to $" + cart + ". Would you like anything else?";
+		}
+		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		{
+			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
+		}
+		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		{
+			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
+		}
 	}
 
 	/**
