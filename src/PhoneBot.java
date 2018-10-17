@@ -77,17 +77,17 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
-        else if (findKeyword(statement, "check phones", 0) >= 0)
+        else if (findKeyword(statement, "check the phones", 0) >= 0)
         {
             return customerCheckPhonesStatement(statement);
         }
+		else if (findKeyword(statement, "see the phones", 0) >= 0)
+		{
+			return customerSeePhonesStatement(statement);
+		}
         else if (findKeyword(statement, "Android", 0) >= 0)
 		{
 			return findAndroidStatement(statement);
-		}
-		else if (findKeyword(statement, "Apple", 0) >= 0)
-		{
-			return findAppleStatement(statement);
 		}
 
 		// Response transforming I want to statement
@@ -209,26 +209,22 @@ public class PhoneBot
             statement = statement.substring(0, statement
                     .length() - 1);
         }
-        int psnOfCheck = findKeyword (statement, "check", 0);
-        int psnOfPhones = findKeyword (statement, "phones", psnOfCheck);
-        String restOfStatement = statement.substring(psnOfCheck + 1, psnOfPhones).trim();
-        return "Great! Are you looking for an Android or an Apple phone?";
+        return "Great! Our selection of Android phones include the Samsung Galaxy S9, Google Pixel 2, and the LG V30. We're having a special so each phones only costs $600! Would you like one?";
     }
 
-    private String findAppleStatement(String statement)
-    {
-        //  Remove the final period, if there is one
-        statement = statement.trim();
-        String lastChar = statement.substring(statement
-                .length() - 1);
-        if (lastChar.equals("."))
-        {
-            statement = statement.substring(0, statement
-                    .length() - 1);
-        }
-        statement = statement.toLowerCase();
-        return "For Apple phones, we have the new iPhone XS, XS Max, and XR. Would you like one?";
-    }
+	private String customerSeePhonesStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		return "We have the the Samsung Galaxy S9, Google Pixel 2, and the LG V30.";
+	}
 
 	private String findAndroidStatement(String statement)
 	{
