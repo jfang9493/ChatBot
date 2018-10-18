@@ -90,7 +90,7 @@ public class PhoneBot
 		{
 			return customerSeePhones3Statement(statement);
 		}
-		else if (findKeyword(statement, "page 2", 0) >= 0)
+		else if (findKeyword(statement, "page 3", 0) >= 0)
 		{
 			return customerSeePhonesStatement(statement);
 		}
@@ -239,7 +239,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "Page 1 of our selection includes the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would like to see Would you like to pick one?";
+		return "Page 1/3 of our selection includes the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would like to see other pages or would you like to pick a phone?";
 	}
 
 	private String customerSeePhones2Statement(String statement)
@@ -253,7 +253,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would you like to pick one?";
+		return "On page 2/3 of our selection we have the iPhone 8, the iPhone X, and the iPhone XS. Would you like to see other pages or would you like to see our phones?";
 	}
 
 	private String customerSeePhones3Statement(String statement)
@@ -267,7 +267,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would you like to pick one?";
+		return "On page 3/3 of our selection we have the Huawei P20 Pro, the Google Pixel 3, and the Samsung Galaxy Note 9. Would you like to see other pages or would you like to see our phones?";
 	}
 
 	private String phonePriceStatement(String statement)
@@ -317,7 +317,7 @@ public class PhoneBot
 		{
 			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
 		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		else (findKeyword(statement, "samsung galaxy s9",0) >=0)
 		{
 			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
 		}

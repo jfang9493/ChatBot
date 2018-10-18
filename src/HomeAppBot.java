@@ -132,7 +132,7 @@ public class HomeAppBot
 	 */
 	private String transformIWantToBuyStatement(String statement)
 	{
-		String[] products = {"SuperFridge9000", "NormalFridge2000", "4 Slot Flamer 2018", "2 Slot Flamer 2018", "ToastMaster General", "Typhoon", "Hurricane", "Radiation Pro", "SuperMicro"};
+		String[] products = {"SuperFridge9000", "NormalFridge2000", "4 Slot Flamer 2018", "2 Slot Flamer 2018", "ToastMaster General", "Typhoon", "Hurricane", "RadiationPro", "SuperMicro"};
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
