@@ -15,6 +15,7 @@ public class GroceryBot
     //conversation changes depending on which type you're looking for.
     int path = 0;
     String category;
+    //variable used to store the previous statement before it is overwritten
     String statement1;
     /**
      * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
@@ -163,7 +164,12 @@ public class GroceryBot
             path++;
         }
         else if (path == 2){
-            response = "Well, we should have " + statement1 + " in isle " + category + ". What would you want to do now?";
+            response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now?";
+            path++;
+        }
+        else if (findKeyword(statement,"I would like to",0) >= 0 && path == 3){
+            statement1 = statement.trim();
+            response = transformIWouldLikeToStatement(statement);
             path++;
         }
         else
@@ -195,6 +201,28 @@ public class GroceryBot
         String restOfStatement = statement.substring(psn + 9).trim();
         return "Why do you want to " + restOfStatement + "?";
     }
+    /**
+     * Take a statement with "I would like to <something>." and transform it into
+     * "Why would you like to <something>?"
+     * @param statement the user statement, assumed to contain "I would like to"
+     * @return the transformed statement
+     */
+    private String transformIWouldLikeToStatement(String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
+        int psn = findKeyword (statement, "I would like to", 0);
+        String restOfStatement = statement.substring(psn + 9).trim();
+        return "Why would you like to " + restOfStatement + "?";
+    }
+
 
 
     /**
@@ -267,29 +295,6 @@ public class GroceryBot
         String restOfStatement = statement.substring(psn + 16).trim();
         return "What kind of " + restOfStatement + "?";
     }
-    /**
-     * Take a statement with "beverage" and transform it into
-     * "What kind of beverage? We have coffee, tea, juice, and soda."
-     * @param statement the user statement, possibly containing "beverage"
-     * @return the transformed statement
-     */
-    private String transformBeverageStatement(String statement)
-    {
-        //  Remove the final period, if there is one
-        statement = statement.trim();
-        String lastChar = statement.substring(statement
-                .length() - 1);
-        if (lastChar.equals("."))
-        {
-            statement = statement.substring(0, statement
-                    .length() - 1);
-        }
-
-        int psn = findKeyword (statement, "beverage", 0);
-        String restOfStatement = statement.substring(psn + 8).trim();
-        return "What kind of " + restOfStatement + "? We have coffee, tea, juice, and soda.";
-    }
-
 
     /**
      * Search for one word in phrase. The search is not case
