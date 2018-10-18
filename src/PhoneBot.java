@@ -317,7 +317,7 @@ public class PhoneBot
 		{
 			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
 		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		else (findKeyword(statement, "samsung galaxy s9",0) >=0)
 		{
 			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
 		}
