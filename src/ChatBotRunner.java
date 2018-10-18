@@ -29,19 +29,19 @@ public class ChatBotRunner {
                 chatbot1.phoneLoop(statement);
                 statement = in.nextLine();
             }
-            if (statement.equals("games")) {
+            else if (statement.equals("games") || statement.equals("game")) {
                 chatbot2.gameLoop(statement);
                 statement = in.nextLine();
             }
-            if (statement.equals("home appliances")) {
+            else if (statement.equals("home appliances") || statement.equals("home appliance")) {
                 chatbot3.homeLoop(statement);
                 statement = in.nextLine();
             }
-            if (statement.equals("groceries")) {
+            else if (statement.equals("groceries") || statement.equals("grocery")) {
                 chatbot4.groceryLoop(statement);
                 statement = in.nextLine();
             }
-            if(!statement.equals("phones")||!statement.equals("games")||!statement.equals("home appliances")||!statement.equals("groceries")){
+            else {
                 System.out.println("Sorry, we don't have this here, please choose from phones, games, home appliances, or groceries");
                 statement = in.nextLine();
             }
