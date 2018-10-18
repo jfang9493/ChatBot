@@ -85,6 +85,21 @@ public class HomeAppBot
             response = "My favorite toaster is the 4 Slot Flamer 2018, but we also have the 2 Slot Flamer 2018 and the ToastMaster General. Which would you like to know about?";
         }
 
+        else if (findKeyword(statement, "laundry machine") >= 0 || (findKeyword(statement, "laundry machines")) >=0 )
+		{
+			response = "We only have 1 laundry machine in stock. It's called the Typhoon and it costs $5000, but it is very effective.";
+		}
+
+		else if (findKeyword(statement, "dishwasher") >=0 || (findKeyword(statement, "dishwashers")) >=0)
+		{
+			response = "My favorite dishwasher is called the Hurricane, it has 2 levels for you to put your dishes and it's very spacious. It costs $100";
+		}
+
+		else if (findKeyword(statement, "microwave") >=0 || (findKeyword(statement, "microwaves")) >= 0)
+		{
+			response = "There are 2 types of microwaves in stock, the RadiationPro which costs $8000 and comes with every feature imaginable, and the SuperMicro which costs $80 and is not very good";
+		}
+
 		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
 		{
 			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
@@ -117,7 +132,7 @@ public class HomeAppBot
 	 */
 	private String transformIWantToBuyStatement(String statement)
 	{
-		String[] products = {"SuperFridge9000", "NormalFridge2000", "4 Slot Flamer 2018", "2 Slot Flamer 2018", "ToastMaster General"};
+		String[] products = {"SuperFridge9000", "NormalFridge2000", "4 Slot Flamer 2018", "2 Slot Flamer 2018", "ToastMaster General", "Typhoon", "Hurricane", "RadiationPro", "SuperMicro"};
 		//  Remove the final period, if there is one
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
@@ -143,7 +158,7 @@ public class HomeAppBot
 				inStock += 0;
 			}
 		}
-		if(inStock == 1)
+		if(inStock >= 1)
 		{
 			return "That's great! You can pay for " + restOfStatement + " right now, just put in your credit card information!";
 		}
