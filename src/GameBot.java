@@ -127,13 +127,6 @@ public class GameBot
 		return "Why do you like to buy " + restOfStatement + "?";
 	}
 
-	
-	/**
-	 * Take a statement with "I want <something>." and transform it into 
-	 * "Would you really be happy if you had <something>?"
-	 * @param statement the user statement, assumed to contain "I want"
-	 * @return the transformed statement
-	 */
     private String recommendGames(String statement)
     {
     	String suggest = "";
@@ -149,8 +142,8 @@ public class GameBot
         }
         if(statement.equals("FPS"))
 		{
-            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomFPSGame [r.nextInt(randomFPSGame.length)];
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
             System.out.println("Would you like to know more about this game?");
             if(statement.equals("yes"))
             {
@@ -159,8 +152,8 @@ public class GameBot
 		}
 		if(statement.equals("MOBA"))
 		{
-            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomMOBAGame [r.nextInt(randomMOBAGame.length)];
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
             System.out.println("Would you like to know more about this game?");
             if(statement.equals("yes"))
             {
@@ -169,8 +162,8 @@ public class GameBot
 		}
 		if(statement.equals("RPG"))
 		{
-            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomRPGGame [r.nextInt(randomRPGGame.length)];
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
             System.out.println("Would you like to know more about this game?");
             if(statement.equals("yes"))
             {
@@ -179,15 +172,15 @@ public class GameBot
 		}
 		if(statement.equals("Card"))
 		{
-            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
 			suggest = randomCardGame [r.nextInt(randomCardGame.length)];
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
             System.out.println("Would you like to know more about this game?");
             if(statement.equals("yes"))
             {
                 System.out.println("Card games like this are fun because of how you can get collect rare cards from the store using the currency in the game. The currency is gained by playing games with other players online using a set of deck you make to perform strategy that can defeat the enemy through care thought proccess");
             }
 		}
-        return "would you like to know more about this game?";
+        return "Please say yes for this info. No will make me sad";
     }
 	private String transformIWantToPlayStatement(String statement)
 	{
@@ -201,7 +194,7 @@ public class GameBot
 					.length() - 1);
 		}
 		int psn = findKeyword (statement, "I want to play", 0);
-		String restOfStatement = statement.substring(psn + 13).trim();
+		String restOfStatement = statement.substring(psn + 14).trim();
         randomResponse++;
 		return "So you really like to play " + restOfStatement + "? I see.";
 	}
