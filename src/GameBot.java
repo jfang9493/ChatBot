@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -5,6 +7,7 @@ public class GameBot
 {
 	int emotion = 0;
     int randomResponse = 0;
+    private String[] WantedGames = {};
 	public void gameLoop(String statement)
 	{
 		Scanner in = new Scanner (System.in);
@@ -130,16 +133,18 @@ public class GameBot
             if(statement.equals("yes"))
             {
                 System.out.println("Theses games are usually about gun fights either in real life or fantasy. It consist of strategy based game play for either Attacking or Defending side, and the well performing your team members. Reaction and mouse control is also important for a good FPS player to destroy their enemy");
+				System.out.println("Here are some FPS games we have\"OverWatch\",\"PUBG\",\"Tom Clancy's Rainbow Six Siege\",\"CounterStrike: Global Offence\",\"Destiny 2\",\"Call Of Duty: BlackOPS\"");
             }
 		}
 		if(statement.equals("MOBA"))
 		{
 			suggest = randomMOBAGame [r.nextInt(randomMOBAGame.length)];
-            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play "+ suggest);
+            System.out.println("So you really like to play" + statement + "? I see. I would suggest you to play games like "+ suggest);
             System.out.println("Would you like to know more about this game?");
             if(statement.equals("yes"))
             {
                 System.out.println("This type of games are challenging but also fun for players who want skill based competition with other players online. The victory of 1 game is determine by how well you know the mechanic of the game, strategy you perform and teamwork of you other 4 team members.");
+                System.out.println("Here is our list of MOBA games,League of Legends,DOTA2,Hero Of The Storm");
             }
 		}
 		if(statement.equals("RPG"))
@@ -150,6 +155,7 @@ public class GameBot
             if(statement.equals("yes"))
             {
                 System.out.println("This kind of games is fun for people who like to make a character in a different world. You can build up your character, make friends with other players, and have group events such as raiding. This type of game usually uses more time as if you are living in that world.");
+				System.out.println("Hearthstone,UNO,Yo-Gi-Yu,Pokemon Card Games");
             }
 		}
 		if(statement.equals("Card"))
@@ -160,6 +166,7 @@ public class GameBot
             if(statement.equals("yes"))
             {
                 System.out.println("Card games like this are fun because of how you can get collect rare cards from the store using the currency in the game. The currency is gained by playing games with other players online using a set of deck you make to perform strategy that can defeat the enemy through care thought proccess");
+				System.out.println("Hearthstone,UNO,Yo-Gi-Yu,Pokemon Card Games");
             }
 		}
         return "Please say yes for this info. No will make me sad";
