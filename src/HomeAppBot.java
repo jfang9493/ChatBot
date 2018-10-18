@@ -355,7 +355,7 @@ public class HomeAppBot
 			"Excuse me?",
 			"You don't say.",
 			"It's all not boolean to me... because I am a real person of course",
-			"So, would you like to go for a walk?",
+			"What do you want?",
 			"Could you rephrase your statement?"
 	};
 	private String [] randomAngryResponses = {"You are making it very difficult for me to help you", "Could we please stay on topic?", "I'm sorry, we don't sell our appliances to MEANIES!"};
