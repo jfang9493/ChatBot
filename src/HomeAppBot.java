@@ -100,6 +100,57 @@ public class HomeAppBot
 			response = "There are 2 types of microwaves in stock, the RadiationPro which costs $8000 and comes with every feature imaginable, and the SuperMicro which costs $80 and is not very good";
 		}
 
+
+
+
+		else if (findKeyword(statement, "SuperFridge9000") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "NormalFridge2000") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "4 Slot Flamer 2018") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "2 Slot Flamer 2018") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "ToastMaster General") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "Typhoon") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "Hurricane") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "RadiationPro") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "SuperMicro") >= 0)
+		{
+			response = "";
+		}
+
+
+
+
 		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
 		{
 			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
