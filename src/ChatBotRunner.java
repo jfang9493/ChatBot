@@ -20,7 +20,7 @@ public class ChatBotRunner {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Welcome to the chatbot, nice to meet you.");
-        System.out.println("What kind of store are you looking to check? We have phones, games, home appliances, and groceries.");
+        System.out.println("What kind of store are you looking to check? We have phones, games, home appliances, and groceries. If you want to change stores type in 'change store'.");
         String statement = in.nextLine();
 
 
