@@ -21,18 +21,18 @@ public class PhoneBot
 	 */
 	public void phoneLoop(String statement)
 	{
+		done = false;
 		Scanner in = new Scanner (System.in);
 		emotion = 0;
 		System.out.println (getGreeting());
 		statement = in.nextLine();
-		while (!statement.equals("Bye") && !statement.equals("change store") && done != true)
+		while (!statement.equals("Bye") && !statement.equals("change store") && !done)
 		{
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
 				statement = in.nextLine();
 		}
 		System.out.println("Which store would you like to visit now? The other stores are for phones, games, and home appliances.");
-		System.out.println(statement);
 	}
 	/**
 	 * Get a default greeting 	
@@ -79,6 +79,10 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
+		else if (findKeyword(statement,"complete",0)>=0)
+		{
+			return completePurchase(statement);
+		}
 		else if (findKeyword(statement, "iphone", 0) >= 0 || findKeyword(statement, "samsung galaxy", 0) >= 0 || findKeyword(statement, "pixel", 0) >= 0 || findKeyword(statement, "v40", 0) >= 0 || findKeyword(statement, "thinq", 0) >= 0)
 		{
 			return customerBuyPhone(statement);
@@ -123,10 +127,6 @@ public class PhoneBot
 		else if (findKeyword(statement,"I would like",0)>=0)
 		{
             return transformIWouldStatement(statement);
-		}
-		else if (findKeyword(statement,"complete",0)>=0)
-		{
-			return completePurchase(statement);
 		}
 		else {
             return getRandomResponse();
@@ -197,7 +197,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "Welcome!";
+		return getRandomGreeting();
 	}
 
 	private String transformIWouldStatement(String statement)
@@ -350,7 +350,7 @@ public class PhoneBot
 					.length() - 1);
 		}
 		done = true;
-		return "Your total cost will be $"+ cart + ". Thank you for your purchase and have a nice day!";
+		return "Your total cost will be $" + cart + ". Thank you for your purchase and have a nice day!";
 	}
 
 	/**
@@ -449,7 +449,13 @@ public class PhoneBot
 		}	
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
-	
+
+	private String getRandomGreeting()
+	{
+		Random r = new Random();
+		return randomGreeting[r.nextInt(randomGreeting.length)];
+	}
+
 	private String [] randomNeutralResponses = {"Interesting, tell me more",
 			"Hmmm.",
 			"Do you really think so?",
@@ -458,6 +464,8 @@ public class PhoneBot
 			"So, would you like to go for a walk?",
 			"Could you say that again?"
 	};
+
+	private String [] randomGreeting = {"Welcome!", "Hi!", "Hello!", "Greetings!", "Salutations!"};
 	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
 	
