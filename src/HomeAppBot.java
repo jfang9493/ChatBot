@@ -73,6 +73,12 @@ public class HomeAppBot
 			response = "You don't have to be that harsh :(";
 			emotion --;
 		}
+
+		else if (findKeyword(statement, "hate") >= 0)
+		{
+			response = "Hate is a very strong word and it's very rude";
+			emotion--;
+		}
 		
 		else if (findKeyword(statement, "levin") >= 0)
 		{
