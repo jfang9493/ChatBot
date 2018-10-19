@@ -128,6 +128,10 @@ public class PhoneBot
 		{
             return transformIWouldStatement(statement);
 		}
+		else if (findKeyword(statement,"thank you",0)>=0)
+		{
+			return thanks(statement);
+		}
 		else {
             return getRandomResponse();
 		}
@@ -156,7 +160,20 @@ public class PhoneBot
 		return "Why do you want to " + restOfStatement + "?";
 	}
 
-	
+	private String thanks(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		return "You're welcome!";
+	}
+
 	/**
 	 * Take a statement with "I want <something>." and transform it into
 	 * "Would you really be happy if you had <something>?"
