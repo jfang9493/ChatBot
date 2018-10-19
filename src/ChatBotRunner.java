@@ -1,3 +1,5 @@
+//Jackie Fang, ShuYi Jiang, Sullivan O’Connor, Brandon Smith
+
 import java.util.Scanner;
 
 /**
@@ -23,8 +25,7 @@ public class ChatBotRunner {
 
 
         while (!statement.equals("Bye")) {
-            //Use Logic to control which chatbot is handling the conversation\
-            //This example has only chatbot1
+            //Use Logic to control which chatbot is handling the conversation
             if (statement.equals("phones") || statement.equals("phone")) {
                 chatbot1.phoneLoop(statement);
                 statement = in.nextLine();

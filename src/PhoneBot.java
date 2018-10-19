@@ -39,7 +39,7 @@ public class PhoneBot
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, welcome to the phone shop! What can I do for you today?";
+		return "Hi, welcome to the Fang's Famous Fones! We sell the most up to date phones in the world! What can I do for you today?";
 	}
 	
 	/**
@@ -78,33 +78,37 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
-        else if (findKeyword(statement, "check the phones", 0) >= 0 || findKeyword(statement, "page 1", 0) >= 0)
+        else if (findKeyword(statement, "check", 0)>= 0 || findKeyword(statement, "see", 0)>= 0)
         {
-            return customerCheckPhonesStatement(statement);
+            return customerCheckPhones(statement);
         }
-		else if (findKeyword(statement, "see the phones", 0) >= 0 || findKeyword(statement, "page 1", 0) >= 0)
+		else if (findKeyword(statement, "hi", 0) >= 0)
 		{
-			return customerSeePhones2Statement(statement);
-		}
-		else if (findKeyword(statement, "page 2", 0) >= 0)
-		{
-			return customerSeePhones3Statement(statement);
-		}
-		else if (findKeyword(statement, "page 3", 0) >= 0)
-		{
-			return customerSeePhonesStatement(statement);
-		}
-        else if (findKeyword(statement, "buy a phone", 0) >= 0)
-		{
-			return customerBuyPhoneStatement(statement);
-		}
-		else if (findKeyword(statement, "buy phones", 0) >= 0)
-		{
-			return customerBuyPhoneStatement(statement);
+			return customerSayHi(statement);
 		}
 		else if (findKeyword(statement, "how much is", 0) >= 0)
 		{
 			return phonePriceStatement(statement);
+		}
+		else if (findKeyword(statement, "samsung", 0) >= 0)
+		{
+			return samsungPhones(statement);
+		}
+		else if (findKeyword(statement, "apple", 0) >= 0)
+		{
+			return applePhones(statement);
+		}
+		else if (findKeyword(statement, "lg", 0) >= 0)
+		{
+			return lgPhones(statement);
+		}
+		else if (findKeyword(statement, "google", 0) >= 0)
+		{
+			return googlePhones(statement);
+		}
+        else if (findKeyword(statement, "buy a phone", 0) >= 0)
+		{
+			return customerBuyPhone(statement);
 		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -118,6 +122,10 @@ public class PhoneBot
 		else if (findKeyword(statement,"I would like",0)>=0)
 		{
             return transformIWouldStatement(statement);
+		}
+		else if (findKeyword(statement,"complete",0)>=0)
+		{
+			return completePurchase(statement);
 		}
 		else {
             return getRandomResponse();
@@ -177,7 +185,7 @@ public class PhoneBot
 	 * @param statement the user statement, assumed to contain "I" followed by "you"
 	 * @return the transformed statement
 	 */
-	private String transformIYouStatement(String statement)
+	private String customerSayHi(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -188,12 +196,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		
-		int psnOfI = findKeyword (statement, "I", 0);
-		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
-		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
+		return "Welcome!";
 	}
 
 	private String transformIWouldStatement(String statement)
@@ -214,21 +217,7 @@ public class PhoneBot
 		return "Is this" + restOfStatement + " what you are looking for?";
 	}
 
-    private String customerCheckPhonesStatement(String statement)
-    {
-        //  Remove the final period, if there is one
-        statement = statement.trim();
-        String lastChar = statement.substring(statement
-                .length() - 1);
-        if (lastChar.equals("."))
-        {
-            statement = statement.substring(0, statement
-                    .length() - 1);
-        }
-        return "Great! Page 1/3 of our selection includes the Samsung Galaxy S9, the Google Pixel 3, and the LG V40. Would you like to see other pages or would you like to pick a phone?";
-    }
-
-	private String customerSeePhonesStatement(String statement)
+	private String customerCheckPhones(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -239,10 +228,10 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "Page 1/3 of our selection includes the Samsung Galaxy S9, Google Pixel 2, and the LG V30 on display. Would like to see other pages or would you like to pick a phone?";
+		return "What kind of phone do you want? We have Apple, Samsung, Google, and LG phones.";
 	}
 
-	private String customerSeePhones2Statement(String statement)
+	private String samsungPhones(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -253,10 +242,10 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "On page 2/3 of our selection we have the iPhone 8, the iPhone X, and the iPhone XS. Would you like to see other pages or would you like to see our phones?";
+		return "We have the Samsung Galaxy S9 and the Samsung Galaxy Note 9. Would you like to pick a phone or view our other phones? We also have Apple phones, Google phones, and LG phones.";
 	}
 
-	private String customerSeePhones3Statement(String statement)
+	private String applePhones(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -267,7 +256,35 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "On page 3/3 of our selection we have the Huawei P20 Pro, the Google Pixel 3, and the Samsung Galaxy Note 9. Would you like to see other pages or would you like to see our phones?";
+		return "We have the iPhone 8, the iPhone X, and the iPhone XS. Would you like to pick a phone or view our other phones? We also have Samsung phones, Google phones, and LG phones.";
+	}
+
+	private String lgPhones(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		return "We have the LG V40 and the LG G7 ThinQ. Would you like to pick a phone or view our other phones? We also have Apple phones, Google phones, and Samsung phones.";
+	}
+
+	private String googlePhones(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		return "We have the Google Pixel 2 and the Google Pixel 3. Would you like to pick a phone or view our other phones? We also have Apple phones, Samsung phones, and LG phones.";
 	}
 
 	private String phonePriceStatement(String statement)
@@ -282,22 +299,19 @@ public class PhoneBot
 					.length() - 1);
 		}
 		statement = statement.toLowerCase();
-		if (findKeyword(statement, "google pixel 3",0) >=0)
-		{
-			return "The Google Pixel 3 costs $1000. Is there anything else you need help with?";
-		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
-		{
-			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
-		}
-		else if (findKeyword(statement, "lg v40",0) >=0)
-		{
-			return "The LG V40 costs $900. Is there anything else you need help with?";
-		}
+		if (findKeyword(statement, "samsung galaxy s9",0) >=0) return "The Samsung Galaxy S9 costs $750. Is there anything else you need help with?";
+		else if (findKeyword(statement, "samsung galaxy note 9",0) >=0) return "The Samsung Galaxy Note 9 costs $1000. Is there anything else you need help with?";
+		else if (findKeyword(statement, "iphone 8",0) >=0) return "The iPhone 8 costs $700. Is there anything else you need help with?";
+		else if (findKeyword(statement, "iphone X",0) >=0) return "The iPhone X costs $900. Is there anything else you need help with?";
+		else if (findKeyword(statement, "iphone XS",0) >=0) return "The iPhone XS costs $1000. Is there anything else you need help with?";
+		else if (findKeyword(statement, "lg v40",0) >=0) return "The LG V40 costs $950. Is there anything else you need help with?";
+		else if (findKeyword(statement, "lg g7 thinq",0) >=0) return "The LG G7 ThinQ costs $1000. Is there anything else you need help with?";
+		else if (findKeyword(statement, "google pixel 2",0) >=0) return "The Google Pixel 2 costs $650. Is there anything else you need help with?";
+		else if (findKeyword(statement, "google pixel 3",0) >=0) return "The Google Pixel 3 costs $800. Is there anything else you need help with?";
 		else return "I'm sorry, I don't think I understand that";
 	}
 
-	private String customerBuyPhoneStatement(String statement)
+	private String customerBuyPhone(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -308,20 +322,34 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
-		{
-			cart += 1000;
-			return "That will bring your cart to $" + cart + ". Would you like anything else?";
+		if (findKeyword(statement, "buy",0) >=0) {
+			if (findKeyword(statement, "samsung galaxy s9", 0) >= 0) cart += 750;
+			else if (findKeyword(statement, "samsung galaxy note 9", 0) >= 0) cart += 1000;
+			else if (findKeyword(statement, "iphone 8", 0) >= 0) cart += 700;
+			else if (findKeyword(statement, "iphone X", 0) >= 0) cart += 900;
+			else if (findKeyword(statement, "iphone XS", 0) >= 0) cart += 1000;
+			else if (findKeyword(statement, "lg v40", 0) >= 0) cart += 950;
+			else if (findKeyword(statement, "lg g7 thinq", 0) >= 0) cart += 1000;
+			else if (findKeyword(statement, "google pixel 2", 0) >= 0) cart += 650;
+			else if (findKeyword(statement, "google pixel 3", 0) >= 0) cart += 800;
+			return "That will bring your cart to $" + cart + ". Would you like anything else or would you like to complete your purchase?";
 		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0)
+		return "I don't understand";
+	}
+
+	private String completePurchase(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
 		{
-			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
+			statement = statement.substring(0, statement
+					.length() - 1);
 		}
-		else if (findKeyword(statement, "samsung galaxy s9",0) >=0) 
-		{
-			return "The Samsung Galaxy S9 costs $800. Is there anything else you need help with?";
-		}
-		return "I dont understand";
+
+		return "Your total cost will be"+ cart + " Thank you for your purchase and have a nice day!";
 	}
 
 	/**
