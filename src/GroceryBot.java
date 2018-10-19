@@ -17,6 +17,8 @@ public class GroceryBot
     String category;
     //variable used to store the previous statement before it is overwritten
     String statement1;
+    //variable used to store if a value is found in an array.
+    int found = 0;
     /**
      * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
      * @param statement the statement typed by the user
@@ -25,10 +27,11 @@ public class GroceryBot
     {
         Scanner in = new Scanner (System.in);
         emotion = 0;
+        path = 0;
         System.out.println (getGreeting());
         statement = in.nextLine();
 
-        while (!statement.equals("Bye") && !statement.equals("change store") && emotion != -10)
+        while (!statement.equals("Bye") && !statement.equals("change store") && !statement.equals("leave") && emotion != -10)
         {
             //getResponse handles the user reply
             System.out.println(getResponse(statement));
@@ -144,7 +147,7 @@ public class GroceryBot
             path++;
         }
         else if (findKeyword(statement, "cleaners",0) >= 0 && path == 0){
-            response = "What kind of cleaner? We have all- purpose, laundry detergent and dishwashing liquid/detergent.";
+            response = "What kind of cleaner? We have all-purpose, laundry detergent and dishwashing liquid.";
             category = "I";
             path++;
         }
@@ -160,17 +163,176 @@ public class GroceryBot
         }
         else if (path == 1){
             statement1 = statement.trim();
-            response = "It would be nice if we had " + statement1 + " wouldn't it?";
+            Random r = new Random ();
+            response = "You really want " + statement1 + ", don't you?";
             path++;
         }
         else if (path == 2){
-            response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now?";
-            path++;
+            if(category.equals("A")){
+                for(String value : catA) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("B")){
+                for(String value : catB) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("C")){
+                for(String value : catC) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("D")){
+                for(String value : catD) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("E")){
+                for(String value : catE) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("F")){
+                for(String value : catF) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("G")){
+                for(String value : catG) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("H")){
+                for(String value : catH) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("I")){
+                for(String value : catI) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("J")){
+                for(String value : catJ) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
+            else if(category.equals("K")){
+                for(String value : catK) {
+                    if(value.equals(statement1)){
+                        found++;
+                    }
+                    if(found > 0){
+                        response = "Well, we should have " + statement1 + " in isle " + category + ". What would you like to do now? Find another item or leave?";
+                    }
+                    else {
+                        response = "Well, sorry to tell you but we don't have that item here. What would like to do now? Find another item or leave?";
+                    }
+                    path++;
+                }
+            }
         }
         else if (findKeyword(statement,"I would like to",0) >= 0 && path == 3){
             statement1 = statement.trim();
             response = transformIWouldLikeToStatement(statement);
             path++;
+        }
+        if(path == 3){
+            if(findKeyword(statement.toLowerCase(),"find another item",0) >= 0){
+                path = 0;
+                response = "Okay. What item would you like to find now? We have beverages, bakery items, canned goods, dairy items, dry goods, frozen foods, meat, produce, cleaners, paper goods and personal care.";
+            }
         }
         else
         {
@@ -421,5 +583,21 @@ public class GroceryBot
             "I've had enough!!",
             "I'm done."
     };
+    private String[] path1 = {"You really want " + statement1 + ", don't you?",
+            "Are you sure that you want " + statement1 + "?",
+            "It would be nice if we had " + statement1 + " wouldn't it?"
+    };
+    private String[] catA = {"coffee", "tea", "juice", "soda"};
+    private String[] catB = {"sandwich loaves", "dinner rolls", "tortillas", "bagels"};
+    private String[] catC = {"vegetables", "spaghetti sauce", "ketchup"};
+    private String[] catD = {"cheese", "eggs", "milk", "yogurt", "butter"};
+    private String[] catE = {"cereal", "flour", "sugar", "pasta", "mixes"};
+    private String[] catF = {"waffles", "vegetables", "individual meals", "ice cream"};
+    private String[] catG = {"lunch meat", "poultry", "beef", "pork"};
+    private String[] catH = {"fruits", "vegetables"};
+    private String[] catI = {"all-purpose", "laundry detergent", "dishwashing liquid"};
+    private String[] catJ = {"paper towels", "toilet paper", "aluminum foil", "sandwich bags"};
+    private String[] catK = {"shampoo", "soap", "hand soap", "shaving cream"};
+
 
 }
