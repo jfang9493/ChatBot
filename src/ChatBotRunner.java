@@ -14,7 +14,7 @@ public class ChatBotRunner {
      */
     public static void main(String[] args) {
         PhoneBot chatbot1 = new PhoneBot();
-        GameBot chatbot2 = new GameBot();
+        GameInfoBot chatbot2 = new GameInfoBot();
         HomeAppBot chatbot3 = new HomeAppBot();
         GroceryBot chatbot4 = new GroceryBot();
 
