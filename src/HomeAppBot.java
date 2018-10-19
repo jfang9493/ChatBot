@@ -60,6 +60,7 @@ public class HomeAppBot
 		if (statement.length() == 0)
 		{
 			response = "I can't help you if you don't tell me what you need.";
+			emotion--;
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
@@ -67,10 +68,28 @@ public class HomeAppBot
 			response = "Why so negative?";
 			emotion--;
 		}
+
+		else if (findKeyword(statement, "bad") >= 0 || (findKeyword(statement, "terrible")) >= 0 || (findKeyword(statement, "horrible")) >= 0 || (findKeyword(statement, "not good")) >= 0)
+		{
+			response = "You don't have to be that harsh :(";
+			emotion--;
+		}
+
+		else if (findKeyword(statement, "hate") >= 0)
+		{
+			response = "Hate is a very strong word and it's very rude";
+			emotion--;
+		}
 		
 		else if (findKeyword(statement, "levin") >= 0)
 		{
 			response = "More like LevinTheDream amiright?";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "yes") >= 0)
+		{
+			response = "Excellent!";
 			emotion++;
 		}
 
@@ -100,57 +119,6 @@ public class HomeAppBot
 			response = "There are 2 types of microwaves in stock, the RadiationPro which costs $8000 and comes with every feature imaginable, and the SuperMicro which costs $80 and is not very good";
 		}
 
-
-
-
-		else if (findKeyword(statement, "SuperFridge9000") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "NormalFridge2000") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "4 Slot Flamer 2018") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "2 Slot Flamer 2018") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "ToastMaster General") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "Typhoon") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "Hurricane") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "RadiationPro") >= 0)
-		{
-			response = "";
-		}
-
-		else if (findKeyword(statement, "SuperMicro") >= 0)
-		{
-			response = "";
-		}
-
-
-
-
 		else if ((findKeyword(statement, "what") >= 0 && ((findKeyword(statement, "sell")) >= 0) || (findKeyword(statement, "have")) >= 0))
 		{
 			response = "We sell many types of appliances such as refrigerators, toasters, laundry machines, dishwashers, and microwaves! What would you like to know about?";
@@ -166,7 +134,58 @@ public class HomeAppBot
 		else if (findKeyword(statement, "I want a",0) >= 0)
 		{
 			response = transformIWantAStatement(statement);
-		}	
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "SuperFridge9000") >= 0)
+		{
+			response = "The SuperFridge9000 is a wonderful product, it's a smart fridge, its dimensions are 10ft * 20ft * 30ft, and it costs $1500";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "NormalFridge2000") >= 0)
+		{
+			response = "The NormalFridge2000 is like the little brother of the SuperFridge9000. There isn't much room in it and it's not a smart fridge so it only costs $800";
+		}
+
+		else if (findKeyword(statement, "4 Slot Flamer 2018") >= 0)
+		{
+			response = "The 4 Slot Flamer 2018 is a toaster with 4 slots for bread (obviously). It costs $87";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "2 Slot Flamer 2018") >= 0)
+		{
+			response = "The 2 Slot Flamer 2018 is a toaster with 2 slots for bread and it costs $45";
+		}
+
+		else if (findKeyword(statement, "ToastMaster General") >= 0)
+		{
+			response = "The ToastMaster General is a toaster with 4 slots for bread, but it consumes more power than the 4 Slot Flamer and it doesn't look as nice. It costs $100";
+		}
+
+		else if (findKeyword(statement, "Typhoon") >= 0)
+		{
+			response = "The Typhoon is our only laundry machine. It can wash any stain out of all of you clothes by using advanced laundry technology, so it costs $5000";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "Hurricane") >= 0)
+		{
+			response = "The Hurricane (not to be confused with our laundry machine the Typhoon) can wash up to 500 dishes at once and it only costs $100! What a steal!";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "RadiationPro") >= 0)
+		{
+			response = "The RadiationPro uses mind reading and quantum shape shifting technology to provide every feature you will ever need, so the price of $8000 is actually underselling it";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "SuperMicro") >= 0)
+		{
+			response = "The SuperMicro is a very bad microwave and I do not recommend it. It breaks frequently but it only costs $80";
+		}
 		else
 		{
 			response = getRandomResponse();
@@ -401,7 +420,7 @@ public class HomeAppBot
 
 	}
 	
-	private String [] randomNeutralResponses = {"What do you want to purchase?",
+	private String [] randomNeutralResponses = {"What do you want to buy?",
 			"I'm sorry, I don't understand",
 			"Excuse me?",
 			"You don't say.",
