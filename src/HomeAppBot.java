@@ -60,6 +60,7 @@ public class HomeAppBot
 		if (statement.length() == 0)
 		{
 			response = "I can't help you if you don't tell me what you need.";
+			emotion--;
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
@@ -71,7 +72,7 @@ public class HomeAppBot
 		else if (findKeyword(statement, "bad") >= 0 || (findKeyword(statement, "terrible")) >= 0 || (findKeyword(statement, "horrible")) >= 0 || (findKeyword(statement, "not good")) >= 0)
 		{
 			response = "You don't have to be that harsh :(";
-			emotion --;
+			emotion--;
 		}
 
 		else if (findKeyword(statement, "hate") >= 0)
@@ -83,6 +84,12 @@ public class HomeAppBot
 		else if (findKeyword(statement, "levin") >= 0)
 		{
 			response = "More like LevinTheDream amiright?";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "yes") >= 0)
+		{
+			response = "Excellent!";
 			emotion++;
 		}
 
@@ -413,7 +420,7 @@ public class HomeAppBot
 
 	}
 	
-	private String [] randomNeutralResponses = {"What do you want to purchase?",
+	private String [] randomNeutralResponses = {"What do you want to buy?",
 			"I'm sorry, I don't understand",
 			"Excuse me?",
 			"You don't say.",
