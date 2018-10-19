@@ -2,8 +2,8 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.util.Random;
 import java.util.Scanner;
-
-public class GameBot
+//Shuyi Jiang
+public class GameInfoBot
 {
 	int emotion = 0;
     int randomResponse = 0;
@@ -96,7 +96,7 @@ public class GameBot
 		return response;
 	}
 
-	private String transformIWantToBuyStatement(String statement)
+	private  String transformIWantToBuyStatement(String statement)
 	{
 		statement = statement.trim();
 		String lastChar = statement.substring(statement
@@ -155,7 +155,7 @@ public class GameBot
             if(statement.equals("yes"))
             {
                 System.out.println("This kind of games is fun for people who like to make a character in a different world. You can build up your character, make friends with other players, and have group events such as raiding. This type of game usually uses more time as if you are living in that world.");
-				System.out.println("Hearthstone,UNO,Yo-Gi-Yu,Pokemon Card Games");
+				System.out.println("World of Warcraft, MapleStory2,");
             }
 		}
 		if(statement.equals("Card"))
@@ -169,7 +169,27 @@ public class GameBot
 				System.out.println("Hearthstone,UNO,Yo-Gi-Yu,Pokemon Card Games");
             }
 		}
-        return "Please say yes for this info. No will make me sad";
+        if(statement.equals("I would lik to know more about FPS"))
+        {
+            System.out.println("Theses games are usually about gun fights either in real life or fantasy. It consist of strategy based game play for either Attacking or Defending side, and the well performing your team members. Reaction and mouse control is also important for a good FPS player to destroy their enemy");
+
+        }
+        if(statement.equals("I would like to know more about MOBA"))
+        {
+            System.out.println("This type of games are challenging but also fun for players who want skill based competition with other players online. The victory of 1 game is determine by how well you know the mechanic of the game, strategy you perform and teamwork of you other 4 team members.");
+
+        }
+        if(statement.equals("I would like to know more about RPG"))
+        {
+            System.out.println("This kind of games is fun for people who like to make a character in a different world. You can build up your character, make friends with other players, and have group events such as raiding. This type of game usually uses more time as if you are living in that world.");
+
+        }
+        if(statement.equals("I would like to know more about Card"))
+        {
+            System.out.println("Card games like this are fun because of how you can get collect rare cards from the store using the currency in the game. The currency is gained by playing games with other players online using a set of deck you make to perform strategy that can defeat the enemy through care thought proccess");
+
+        }
+        return suggest + "would be a good game for you to start, have a nice day, if you wish, you can\"change\" store to visit other store";
     }
 	private String transformIWantToPlayStatement(String statement)
 	{
