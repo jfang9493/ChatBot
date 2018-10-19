@@ -189,7 +189,7 @@ public class GameInfoBot
             System.out.println("Card games like this are fun because of how you can get collect rare cards from the store using the currency in the game. The currency is gained by playing games with other players online using a set of deck you make to perform strategy that can defeat the enemy through care thought proccess");
 
         }
-		return "please say yes so i can tell you more";
+        return suggest + "would be a good game for you to start, have a nice day";
     }
 	private String transformIWantToPlayStatement(String statement)
 	{
