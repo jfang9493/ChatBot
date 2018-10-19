@@ -13,6 +13,7 @@ public class PhoneBot
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
 	int cart = 0;
+	boolean done = false;
 
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
@@ -24,7 +25,7 @@ public class PhoneBot
 		emotion = 0;
 		System.out.println (getGreeting());
 		statement = in.nextLine();
-		while (!statement.equals("Bye") && !statement.equals("change store"))
+		while (!statement.equals("Bye") && !statement.equals("change store") && done != true)
 		{
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
@@ -78,7 +79,11 @@ public class PhoneBot
 			response = "Go for the gold, man.";
 			emotion++;
 		}
-        else if (findKeyword(statement, "check", 0)>= 0 || findKeyword(statement, "see", 0)>= 0)
+		else if (findKeyword(statement, "iphone", 0) >= 0 || findKeyword(statement, "samsung galaxy", 0) >= 0 || findKeyword(statement, "pixel", 0) >= 0 || findKeyword(statement, "v40", 0) >= 0 || findKeyword(statement, "thinq", 0) >= 0)
+		{
+			return customerBuyPhone(statement);
+		}
+        else if (findKeyword(statement, "check", 0)>= 0 || findKeyword(statement, "see", 0)>= 0 || findKeyword(statement, "purchase", 0)>= 0 || findKeyword(statement, "buy", 0)>= 0)
         {
             return customerCheckPhones(statement);
         }
@@ -105,10 +110,6 @@ public class PhoneBot
 		else if (findKeyword(statement, "google", 0) >= 0)
 		{
 			return googlePhones(statement);
-		}
-        else if (findKeyword(statement, "buy a phone", 0) >= 0)
-		{
-			return customerBuyPhone(statement);
 		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -242,7 +243,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the Samsung Galaxy S9 and the Samsung Galaxy Note 9. Would you like to pick a phone or view our other phones? We also have Apple phones, Google phones, and LG phones.";
+		return "We have the Samsung Galaxy S9 and the Samsung Galaxy Note 9. Would you like to buy a phone or view our other phones? We also have Apple phones, Google phones, and LG phones.";
 	}
 
 	private String applePhones(String statement)
@@ -256,7 +257,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the iPhone 8, the iPhone X, and the iPhone XS. Would you like to pick a phone or view our other phones? We also have Samsung phones, Google phones, and LG phones.";
+		return "We have the iPhone 8, the iPhone X, and the iPhone XS. Would you like to buy a phone or view our other phones? We also have Samsung phones, Google phones, and LG phones.";
 	}
 
 	private String lgPhones(String statement)
@@ -270,7 +271,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the LG V40 and the LG G7 ThinQ. Would you like to pick a phone or view our other phones? We also have Apple phones, Google phones, and Samsung phones.";
+		return "We have the LG V40 and the LG G7 ThinQ. Would you like to buy a phone or view our other phones? We also have Apple phones, Google phones, and Samsung phones.";
 	}
 
 	private String googlePhones(String statement)
@@ -284,7 +285,7 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		return "We have the Google Pixel 2 and the Google Pixel 3. Would you like to pick a phone or view our other phones? We also have Apple phones, Samsung phones, and LG phones.";
+		return "We have the Google Pixel 2 and the Google Pixel 3. Would you like to buy a phone or view our other phones? We also have Apple phones, Samsung phones, and LG phones.";
 	}
 
 	private String phonePriceStatement(String statement)
@@ -334,7 +335,7 @@ public class PhoneBot
 			else if (findKeyword(statement, "google pixel 3", 0) >= 0) cart += 800;
 			return "That will bring your cart to $" + cart + ". Would you like anything else or would you like to complete your purchase?";
 		}
-		return "I don't understand";
+		return "I'm sorry, I did not understand.";
 	}
 
 	private String completePurchase(String statement)
@@ -348,8 +349,8 @@ public class PhoneBot
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-
-		return "Your total cost will be"+ cart + " Thank you for your purchase and have a nice day!";
+		done = true;
+		return "Your total cost will be $"+ cart + ". Thank you for your purchase and have a nice day!";
 	}
 
 	/**
