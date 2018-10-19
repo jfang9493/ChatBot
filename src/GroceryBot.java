@@ -328,7 +328,7 @@ public class GroceryBot
             response = transformIWouldLikeToStatement(statement);
             path++;
         }
-        if(path == 3){
+        else if(path == 3){
             if(findKeyword(statement.toLowerCase(),"find another item",0) >= 0){
                 path = 0;
                 response = "Okay. What item would you like to find now? We have beverages, bakery items, canned goods, dairy items, dry goods, frozen foods, meat, produce, cleaners, paper goods and personal care.";
